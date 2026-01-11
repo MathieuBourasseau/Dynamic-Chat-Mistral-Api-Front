@@ -17,23 +17,31 @@ export default function Panel() {
 
 
     return (
-        <aside className={
+        <aside 
+            className={
             `h-screen flex flex-col gap-8 bg-teal-200 p-4 transition-all duration-200 ease-in-out
-            ${isOpen ? "max-w-[300px]" : "max-w-[50px]"}`}>
+            ${isOpen ? "max-w-[300px]" : "max-w-[50px]"}`}
+        >
 
             {/* OPEN/CLOSE PANEL */}
             <div className="flex justify-between items-center">
 
                 <button 
                     onClick={togglePanel}
-                    className="cursor-pointer"
+                    className="cursor-pointer text-lg"
                 >
                     {isOpen ? <ImCross /> : <GiHamburgerMenu />}
                 </button>
 
                 {/* SEARCH FORMER CHATS */}
                 <button>
-                    <FaSearch className={`transition-all ease-in-out ${isOpen ? "opacity-100 duration-200 delay-100" : "opacity-0 delay-0 duration-0"}`} />
+                    <FaSearch 
+                        className={`
+                        transition-all ease-in-out text-lg
+                        ${isOpen ? 
+                        "opacity-100 duration-200 delay-100" :
+                        "opacity-0 delay-0 duration-0"}`} 
+                    />
                 </button>
             </div>
 
@@ -41,12 +49,14 @@ export default function Panel() {
             <div>
                 <button
                     onClick={togglePanel}
-                    className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden"
+                    className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden "
                 >
                     <CiCirclePlus className="text-lg" strokeWidth={2} />
-                    {isOpen && 
-                        <span className="">Lancer un nouveau chat</span>
-                    }
+                    <span className={`
+                        transition-all 
+                        ${isOpen ? "duration-200 delay-50 opacity-100" :
+                        "opacity-0  delay-0 duration-0"}`}
+                    >Lancer un nouveau chat</span>
                 </button>
             </div>
 
