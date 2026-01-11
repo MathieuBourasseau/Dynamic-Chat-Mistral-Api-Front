@@ -49,7 +49,7 @@ export default function Panel() {
             </div>
 
             {/* CHATS BLOC*/}
-            <div>
+            <div className={isOpen ? "block" : "hidden"}>
                 <h2 className="font-semibold">Chats</h2>
                 <div>
                     <h2>Titre</h2>
