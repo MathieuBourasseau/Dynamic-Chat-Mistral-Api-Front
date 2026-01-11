@@ -54,14 +54,19 @@ export default function Panel() {
                     <CiCirclePlus className="text-xl" strokeWidth={2} />
                     <span className={`
                         transition-all 
-                        ${isOpen ? "duration-200 delay-50 opacity-100" :
-                        "opacity-0  delay-0 duration-0"}`}
+                        ${isOpen ? "duration-200 delay-30 opacity-100" :
+                        "opacity-0  delay-0 duration-0"}
+                        `}
                     >Lancer un nouveau chat</span>
                 </button>
             </div>
 
             {/* CHATS BLOC*/}
-            <div className={isOpen ? "opacity-100 whitespace-nowrap" : "opacity-0"}>
+            <div className={`
+                transition-all
+                ${isOpen ? "duration-200 delay-10 opacity-100 whitespace-nowrap" : 
+                "opacity-0 delay-0 duration-0"}
+                `}>
                 <h2 className="font-semibold">Chats</h2>
                 <div>
                     <h2>Lorem ipsum dolor sit amet.</h2>
