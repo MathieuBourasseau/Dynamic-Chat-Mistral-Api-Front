@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Chat() {
   return (
-    <div>
-      <h1>Bonjour je suis le chat</h1>
-    </div>
+    <main className="flex flex-1 justify-center p-4">
+      <h1>Titre du chat</h1>
+    </main>
   )
 }

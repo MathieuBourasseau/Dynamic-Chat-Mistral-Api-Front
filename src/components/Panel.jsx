@@ -38,7 +38,7 @@ export default function Panel() {
                 <PanelButton
                     show={isOpen}
                     icon={<FaSearch />}
-                    delay="delay-150"
+                    delay="delay-100"
                 />
             </div>
 

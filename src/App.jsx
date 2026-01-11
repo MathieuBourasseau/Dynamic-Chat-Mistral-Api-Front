@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="flex">
       <Panel />
-      <Chat className="flex-1" />
+      <Chat />
     </div>
   )
 }
