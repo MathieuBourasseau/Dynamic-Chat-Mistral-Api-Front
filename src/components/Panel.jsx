@@ -37,7 +37,7 @@ export default function Panel() {
                 <button>
                     <FaSearch 
                         className={`
-                        transition-all ease-in-out text-lg
+                        transition-all ease-in-out
                         ${isOpen ? 
                         "opacity-100 duration-200 delay-100" :
                         "opacity-0 delay-0 duration-0"}`} 
@@ -51,7 +51,7 @@ export default function Panel() {
                     onClick={togglePanel}
                     className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden "
                 >
-                    <CiCirclePlus className="text-lg" strokeWidth={2} />
+                    <CiCirclePlus className="text-xl" strokeWidth={2} />
                     <span className={`
                         transition-all 
                         ${isOpen ? "duration-200 delay-50 opacity-100" :
