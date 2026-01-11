@@ -39,9 +39,12 @@ export default function Panel() {
             <div>
                 <button
                     onClick={togglePanel}
+                    className="flex items-center gap-4"
                 >
                     <CiCirclePlus className="text-lg cursor-pointer" strokeWidth={2} />
-                    {isOpen}
+                    {isOpen && 
+                        <span>Lancer un nouveau chat</span>
+                    }
                 </button>
             </div>
 
