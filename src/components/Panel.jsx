@@ -33,7 +33,7 @@ export default function Panel() {
 
                 {/* SEARCH FORMER CHATS */}
                 <button>
-                    <FaSearch className={isOpen ? "opacity-100" : "opacity-0"} />
+                    <FaSearch className={`transition-all ease-in-out ${isOpen ? "opacity-100 duration-200 delay-100" : "opacity-0 delay-0 duration-0"}`} />
                 </button>
             </div>
 
