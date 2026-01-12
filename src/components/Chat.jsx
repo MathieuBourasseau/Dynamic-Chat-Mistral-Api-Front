@@ -11,9 +11,14 @@ export default function Chat() {
   ]
 
   return (
-    <main className="flex flex-col flex-1 items-center p-4">
-      <h1>Titre du chat</h1>
-      <div className="flex flex-col max-w-[850px] gap-6">
+    <main className="flex flex-col flex-1 h-screen items-center p-4">
+
+      {/* CHAT TITLE */}
+      <header className="p-4 border-b">
+        <h1 className="font-bold shrink-0">Météo à Clisson 🌤️</h1>
+      </header>
+
+      <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
 
         {messages.map((msg, i) => (
           <div
