@@ -26,9 +26,9 @@ export default function Chat() {
           <div
             key={i}
             className={`p-4 max-w-[70%] shadow-sm rounded-lg
-              ${msg.sender === "user" 
-              ? "self-end bg-[#003c57] text-white"
-              : "self-start border-gray-200" 
+              ${msg.sender === "user"
+                ? "self-end bg-[#003c57] text-white"
+                : "self-start border-gray-200"
               }`}
           >
             {msg.text}
@@ -37,17 +37,17 @@ export default function Chat() {
       </div>
 
       {/* CHAT INPUT */}
-      <form 
-        action="" 
+      <form
+        action=""
         className="max-w-[850px] h-[150px] w-full border-2 border-gray-200 p-4 rounded-lg shadow-sm">
         <div className="flex h-full">
-          <textarea 
-            type="text" 
+          <textarea
+            type="text"
             placeholder="Ecrivez votre question."
             className="h-full flex-1 outline-none resize-none pt-0"
           />
-          <button className="self-end">
-            <FaArrowUp />
+          <button className="self-end cursor-pointer bg-[#f8532a] p-2">
+            <FaArrowUp className="text-white" />
           </button>
         </div>
       </form>
