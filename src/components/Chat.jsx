@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaArrowUp } from "react-icons/fa";
 
 export default function Chat() {
 
@@ -18,6 +19,7 @@ export default function Chat() {
         <h1 className="font-bold shrink-0">Météo à Clisson 🌤️</h1>
       </header>
 
+      {/* CHAT MESSAGES */}
       <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
 
         {messages.map((msg, i) => (
@@ -33,6 +35,22 @@ export default function Chat() {
           </div>
         ))}
       </div>
+
+      {/* CHAT INPUT */}
+      <form 
+        action="" 
+        className="max-w-[850px] h-[150px] w-full border-2 border-gray-200 p-4 rounded-lg shadow-sm">
+        <div className="flex h-full">
+          <textarea 
+            type="text" 
+            placeholder="Ecrivez votre question."
+            className="h-full flex-1 outline-none resize-none pt-0"
+          />
+          <button className="self-end">
+            <FaArrowUp />
+          </button>
+        </div>
+      </form>
     </main>
   )
 }
