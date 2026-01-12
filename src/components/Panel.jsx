@@ -20,7 +20,7 @@ export default function Panel() {
     return (
         <aside 
             className={
-            `h-screen flex flex-col gap-8 bg-teal-200 p-4 transition-all duration-200 ease-in-out
+            `h-screen flex flex-col gap-8 bg-[#003c57] p-4 transition-all duration-200 ease-in-out
             ${isOpen ? "max-w-[300px]" : "max-w-[50px]"}`}
         >
 
@@ -29,7 +29,7 @@ export default function Panel() {
 
                 <PanelButton
                     onClick={togglePanel}
-                    icon={isOpen ? <ImCross /> :<GiHamburgerMenu />}
+                    icon={isOpen ? <ImCross className="text-white" /> :<GiHamburgerMenu className="text-white" />}
                     show={true}
                 />
 
@@ -37,7 +37,7 @@ export default function Panel() {
 
                 <PanelButton
                     show={isOpen}
-                    icon={<FaSearch />}
+                    icon={<FaSearch className="text-white" />}
                     delay="delay-100"
                 />
             </div>
@@ -48,10 +48,10 @@ export default function Panel() {
                     onClick={togglePanel}
                     className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden "
                 >
-                    <CiCirclePlus className="text-xl" strokeWidth={2} />
+                    <CiCirclePlus className="text-xl text-white" strokeWidth={2} />
                     <span className={`
                         transition-all 
-                        ${isOpen ? "duration-200 delay-30 opacity-100" :
+                        ${isOpen ? "duration-200 delay-30 opacity-100 text-white" :
                         "opacity-0  delay-0 duration-0"}
                         `}
                     >Lancer un nouveau chat</span>
@@ -62,10 +62,10 @@ export default function Panel() {
             {/* CHATS BLOC*/}
             <div className={`
                 transition-all
-                ${isOpen ? "duration-200 delay-10 opacity-100 whitespace-nowrap" : 
+                ${isOpen ? "duration-200 delay-10 opacity-100 whitespace-nowrap text-white" : 
                 "opacity-0 delay-0 duration-0"}
                 `}>
-                <h2 className="font-semibold">Chats</h2>
+                <h2 className="font-semibold text-lg">Chats</h2>
                 <div>
                     <h2>Lorem ipsum dolor sit amet.</h2>
                     <h2>Lorem ipsum dolor sit amet.</h2>
