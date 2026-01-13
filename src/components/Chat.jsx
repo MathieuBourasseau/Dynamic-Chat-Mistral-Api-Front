@@ -22,6 +22,15 @@ export default function Chat() {
     setMessage(e.target.value)
   }
 
+  // Handle key down function 
+  const handleKeyDown = (e) => {
+
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  }
+
   // Handle new message sent in the form 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the form event by default
@@ -75,6 +84,7 @@ export default function Chat() {
             className="h-full flex-1 outline-none resize-none pt-0"
             value={message}
             onChange={handleMessage}
+            onKeyDown={handleKeyDown}
           />
 
           {/* BUTTON TO SEND MESSAGE */}
