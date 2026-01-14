@@ -34,6 +34,13 @@ const [currentChatId, setCurrentChatId] = useState(null);
     }
   }
 
+  // URL by default
+  let url= 'http://localhost:5173/api/chats';
+
+  // Bodydata by default 
+  let bodyData = { firstMessage: message, user_id: 1}
+
+
   // Handle new message sent in the form 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the form event by default
@@ -45,6 +52,9 @@ const [currentChatId, setCurrentChatId] = useState(null);
     setMessages([...messages, newMessage]); // Create a copy from existing array and add the new message 
 
     setMessage(''); // Textarea is cleared of its content
+
+    // FETCHING TO THE GOOD URL 
+    
 
     // FETCHING message to Mistral API 
     const response = await fetch('http://localhost:5173/api/chats', 
