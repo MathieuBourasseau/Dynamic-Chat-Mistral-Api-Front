@@ -78,7 +78,10 @@ export default function Chat() {
     setMessages((prev) => [...prev, mistralAnswer]);
 
     // Identify the chat of the current conversation
-    setCurrentChatId(data.chat.id);
+    if (data.chat) {
+
+      setCurrentChatId(data.chat.id);
+    }
 
   }
 
