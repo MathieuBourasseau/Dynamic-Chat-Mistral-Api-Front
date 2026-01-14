@@ -43,7 +43,25 @@ export default function Chat() {
 
     setMessage(''); // Textarea is cleared of its content
 
-    
+    // FETCHING message to Mistral API 
+    const response = await fetch('http://localhost:5173/api/chats', 
+      {
+        method: "POST", // Add message to database
+        headers: {
+          'Content-type' : 'application/json', // JSON content sent 
+        },
+        body: JSON.stringify({
+          firstMessage: newMessage, // Send the new message 
+          user_id: 1,
+        })
+      });
+
+      const data = await response.json();
+      const mistralAnswer = { sender : "ai", text: data.aiReply.content }; // Response from the backend
+
+      // Update the list of messages 
+      setMessages((prev) => [ ...prev, mistralAnswer]);
+
   }
 
   return (
