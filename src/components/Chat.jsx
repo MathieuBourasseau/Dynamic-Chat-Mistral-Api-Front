@@ -11,16 +11,16 @@ export default function Chat() {
     { sender: "user", text: "Va-t-il pleuvoir aujourd'hui ?" },
   ]
 
- // Define a state to get a simulation of chat by default 
- const [messages, setMessages] = useState(chatTest);
+  // Define a state to get a simulation of chat by default 
+  const [messages, setMessages] = useState(chatTest);
 
- // Define a state to get an empty textarea by default
-  const [message, setMessage] = useState(''); 
+  // Define a state to get an empty textarea by default
+  const [message, setMessage] = useState('');
 
-// Define a state to get the chat ID 
-const [currentChatId, setCurrentChatId] = useState(null);
+  // Define a state to get the chat ID 
+  const [currentChatId, setCurrentChatId] = useState(null);
 
- // Update value in the textarea
+  // Update value in the textarea
   const handleMessage = (e) => {
     setMessage(e.target.value)
   }
@@ -34,49 +34,51 @@ const [currentChatId, setCurrentChatId] = useState(null);
     }
   }
 
-  // URL by default
-  let url= 'http://localhost:5173/api/chats';
-
-  // Bodydata by default 
-  let bodyData = { firstMessage: message, user_id: 1}
 
 
   // Handle new message sent in the form 
   const handleSubmit = async (e) => {
+    // URL by default
+    let url = 'http://localhost:5173/api/chats';
+
+    // Bodydata by default 
+    let bodyData = { firstMessage: message, user_id: 1 }
+
+
     e.preventDefault(); // Prevent the form event by default
 
-    if(message.trim() === "") return; // Prevent the user to send empty message
+    if (message.trim() === "") return; // Prevent the user to send empty message
 
     const newMessage = { sender: "user", text: message }; // Get the user message from the textarea
-    
+
     setMessages([...messages, newMessage]); // Create a copy from existing array and add the new message 
 
     setMessage(''); // Textarea is cleared of its content
 
-    // FETCHING TO THE GOOD URL 
-    
+    // FETCHING TO THE GOOD URL WITH GOOD CONTENT
+    if (currentChatId) {
+      url = `http://localhost:5173/api/chats/${currentChatId}/messages`;
+      bodyData = { NewUserMessage: message };
+    }
 
     // FETCHING message to Mistral API 
-    const response = await fetch('http://localhost:5173/api/chats', 
+    const response = await fetch(url,
       {
         method: "POST", // Add message to database
         headers: {
-          'Content-type' : 'application/json', // JSON content sent 
+          'Content-type': 'application/json', // JSON content sent 
         },
-        body: JSON.stringify({
-          firstMessage: newMessage, // Send the new message 
-          user_id: 1,
-        })
+        body: JSON.stringify(bodyData)
       });
 
-      const data = await response.json();
-      const mistralAnswer = { sender : "ai", text: data.aiReply.content }; // Response from the backend
+    const data = await response.json();
+    const mistralAnswer = { sender: "ai", text: data.aiReply.content }; // Response from the backend
 
-      // Update the list of messages 
-      setMessages((prev) => [ ...prev, mistralAnswer]);
+    // Update the list of messages 
+    setMessages((prev) => [...prev, mistralAnswer]);
 
-      // Identify the chat of the current conversation
-      setCurrentChatId(data.chat.id);
+    // Identify the chat of the current conversation
+    setCurrentChatId(data.chat.id);
 
   }
 
@@ -123,7 +125,7 @@ const [currentChatId, setCurrentChatId] = useState(null);
           />
 
           {/* BUTTON TO SEND MESSAGE */}
-          <button 
+          <button
             className="self-end cursor-pointer bg-[#f8532a] p-2"
             type="submit"
           >
