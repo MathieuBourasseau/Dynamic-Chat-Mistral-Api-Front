@@ -39,7 +39,7 @@ export default function Chat() {
   // Handle new message sent in the form 
   const handleSubmit = async (e) => {
     // URL by default
-    let url = 'http://localhost:5173/api/chats';
+    let url = 'http://localhost:3001/api/chats';
 
     // Bodydata by default 
     let bodyData = { firstMessage: message, user_id: 1 }
@@ -57,7 +57,7 @@ export default function Chat() {
 
     // FETCHING TO THE GOOD URL WITH GOOD CONTENT
     if (currentChatId) {
-      url = `http://localhost:5173/api/chats/${currentChatId}/messages`;
+      url = `http://localhost:3001/api/chats/${currentChatId}/messages`;
       bodyData = { newUserMessage: message };
     }
 
@@ -72,6 +72,8 @@ export default function Chat() {
       });
 
     const data = await response.json();
+
+    console.log(data);
     const mistralAnswer = { sender: "ai", text: data.aiReply.content }; // Response from the backend
 
     // Update the list of messages 
