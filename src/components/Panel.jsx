@@ -44,7 +44,10 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList }) {
             {/* NEW CHAT */}
             <div>
                 <button
-                    onClick={togglePanel}
+                    onClick={() => {
+                        togglePanel();
+                        setCurrentChatId(null) // Put ID to null to start a new chat
+                    }}
                     className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden "
                 >
                     <CiCirclePlus className="text-xl text-white" strokeWidth={2} />
