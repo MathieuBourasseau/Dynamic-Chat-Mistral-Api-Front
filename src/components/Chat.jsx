@@ -139,31 +139,30 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         </header>
       )}
 
-      {/* CHAT MESSAGES */}
-      {currentChatId && (
-         <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
+      {/* CHAT MESSAGES OR WELCOME MESSAGE */}
+      {currentChatId ? (
+        <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
 
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`p-4 max-w-[70%]
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`p-4 max-w-[70%]
               ${msg.sender === "user"
-                ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none"
-                : "self-start"
-              }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-      </div>
-      )}
+                  ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none"
+                  : "self-start"
+                }`}
+            >
+              {msg.text}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex  justify-center items-center">
+          <h2 className="text-[35px] text-[#003C57]">Bonjour comment puis-je vous aider aujourd'hui ? 😊</h2>
+        </div>
+      )
+      }
 
-      {/* WELCOME MESSAGE */}
-        {!currentChatId && (
-          <div className="flex  justify-center items-center">
-            <h2 className="text-[35px] text-[#003C57]">Bonjour comment puis-je vous aider aujourd'hui ? 😊</h2>
-          </div>
-        )}
       {/* CHAT INPUT */}
       <form
         action=""
@@ -191,6 +190,6 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
           </button>
         </div>
       </form>
-    </main>
+    </main >
   )
 }
