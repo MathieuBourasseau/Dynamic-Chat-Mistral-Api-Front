@@ -48,6 +48,11 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
     if (currentChatId) {
       fetchChatHistory();
     }
+
+    // Reset the chat if currentChatId is null
+    if (!currentChatId){
+      setMessages([]); // Empty the list of messages
+    }
   }, [currentChatId]); // // Watch currentChatId and re-run the effect on change
 
   // Update value in the textarea
