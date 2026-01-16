@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaArrowUp } from "react-icons/fa";
 
-export default function Chat({currentChatId, setCurrentChatId, setChatsList, chatsList}) {
+export default function Chat({ currentChatId, setCurrentChatId, setChatsList, chatsList }) {
 
   // Data simulation : 
   const chatTest = [
@@ -11,7 +11,7 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList, cha
   // --- DEFINE THE STATES --- 
   const [messages, setMessages] = useState(chatTest);
   const [message, setMessage] = useState(''); // Message is empty by default
-  
+
 
   // --- SHOW THE CHAT HISTORY WHEN ID CHANGES ---
 
@@ -50,7 +50,7 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList, cha
     }
 
     // Reset the chat if currentChatId is null
-    if (!currentChatId){
+    if (!currentChatId) {
       setMessages([]); // Empty the list of messages
     }
   }, [currentChatId]); // // Watch currentChatId and re-run the effect on change
@@ -114,9 +114,9 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList, cha
 
     // Identify the chat of the current conversation
     if (data.chat) {
-      
+
       // Create title in panel only if it's the first message and a new chat
-      if(!currentChatId){
+      if (!currentChatId) {
         setChatsList((prev) => [data.chat, ...prev]);
       };
 
@@ -130,15 +130,18 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList, cha
   const currentTitle = currentChatTitle ? currentChatTitle.name : "Nouveau chat";
 
   return (
-    <main className="flex flex-col flex-1 gap-8 h-screen items-center p-4">
+    <main className={`flex flex-col flex-1 gap-8 h-screen items-center ${!currentChatId ? "justify-center" : ""} p-4`}>
 
       {/* CHAT TITLE */}
-      <header className="p-4 border-b">
-        <h1 className="font-bold shrink-0">{currentTitle}</h1>
-      </header>
+      {currentChatId && (
+        <header className="p-4 border-b">
+          <h1 className="font-bold shrink-0">{currentTitle}</h1>
+        </header>
+      )}
 
       {/* CHAT MESSAGES */}
-      <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
+      {currentChatId && (
+         <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
 
         {messages.map((msg, i) => (
           <div
@@ -153,12 +156,20 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList, cha
           </div>
         ))}
       </div>
+      )}
 
+      {/* WELCOME MESSAGE */}
+        {!currentChatId && (
+          <div className="flex  justify-center items-center">
+            <h2 className="text-[35px] text-[#003C57]">Bonjour comment puis-je vous aider aujourd'hui ? 😊</h2>
+          </div>
+        )}
       {/* CHAT INPUT */}
       <form
         action=""
         onSubmit={handleSubmit}
-        className="max-w-[850px] h-[150px] w-full border-2 border-gray-200 p-4 rounded-lg shadow-sm">
+        className="max-w-[850px] h-[150px] w-full border-2 border-gray-200 p-4 rounded-lg shadow-sm"
+      >
         <div className="flex h-full">
 
           {/* USER MESSAGES */}
