@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaArrowUp } from "react-icons/fa";
 
-export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
+export default function Chat({currentChatId, setCurrentChatId, setChatsList, chatsList}) {
 
   // Data simulation : 
   const chatTest = [
@@ -9,12 +9,12 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
   ]
 
   // --- DEFINE THE STATES --- 
-  const [title, setTitle] = useState("Nouveau chat"); // Title by default for a new chat 
   const [messages, setMessages] = useState(chatTest);
   const [message, setMessage] = useState(''); // Message is empty by default
   
 
   // --- SHOW THE CHAT HISTORY WHEN ID CHANGES ---
+
   useEffect(() => {
 
     // Function to execute when the chat ID is changing
@@ -39,6 +39,9 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
         // Show the messages in the chat
         setMessages(formattedMessages);
 
+        // Show the title of the chat
+        setTitle()
+
       } catch (error) {
         console.error("Erreur lors de la récupération des messages de la conversation.", error);
       }
@@ -52,6 +55,7 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
     // Reset the chat if currentChatId is null
     if (!currentChatId){
       setMessages([]); // Empty the list of messages
+      setTitle('Nouveau chat');
     }
   }, [currentChatId]); // // Watch currentChatId and re-run the effect on change
 
@@ -69,7 +73,8 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
     }
   }
 
-  // Handle new message sent in the form 
+  // --- HANDLE MESSAGES SENT BY USER ---
+
   const handleSubmit = async (e) => {
     // URL by default
     let url = 'http://localhost:3001/api/chats';
@@ -122,20 +127,20 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
       };
 
       setCurrentChatId(data.chat.id);
-      setTitle(data.chat.name);
     };
 
   }
 
-  // Put a default title if the chat does not exist
-  const displayTitle = currentChatId ? title : "Nouveau chat"
+  // Display the title chat
+  const currentChatTitle = chatsList.find(chat => chat.id === currentChatId);
+  const currentTitle = currentChatTitle ? currentChatTitle.name : "Nouveau chat";
 
   return (
     <main className="flex flex-col flex-1 h-screen items-center p-4">
 
       {/* CHAT TITLE */}
       <header className="p-4 border-b">
-        <h1 className="font-bold shrink-0">{displayTitle}</h1>
+        <h1 className="font-bold shrink-0">{currentTitle}</h1>
       </header>
 
       {/* CHAT MESSAGES */}

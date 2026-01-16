@@ -31,13 +31,13 @@ function App() {
     }
     
       fetchChatsHistory();
-      
+
   }, []);
 
   return (
     <div className="flex">
       <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} /> 
-      <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} />
+      <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} />
     </div>
   )
 }
