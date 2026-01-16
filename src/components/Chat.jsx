@@ -115,6 +115,12 @@ export default function Chat({currentChatId, setCurrentChatId, setChatsList}) {
 
     // Identify the chat of the current conversation
     if (data.chat) {
+      
+      // Create title in panel only if it's the first message and a new chat
+      if(!currentChatId){
+        setChatsList((prev) => [data.chat, ...prev]);
+      };
+
       setCurrentChatId(data.chat.id);
       setTitle(data.chat.name);
     };
