@@ -20,7 +20,7 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList }) {
         <aside
             className={
                 `h-screen flex flex-col gap-8 bg-[#003c57] p-4 transition-all duration-200 ease-in-out
-            ${isOpen ? "w-[300px]" : "w-[50px]"}`}
+            ${isOpen ? "w-[350px]" : "w-[50px]"}`}
         >
 
             {/* OPEN/CLOSE PANEL */}
