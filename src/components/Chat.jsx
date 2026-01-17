@@ -62,7 +62,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
   // --- SCROLL EFFECT WHEN MISTRAL IS ANSWERING --- 
 
   useEffect(() => {
-    
+
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
   }, [messages])
@@ -139,7 +139,8 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
   }
 
-  // SHOW THE TITLE CHAT
+  // --- SHOW THE TITLE CHAT ---
+  
   const currentChatTitle = chatsList.find(chat => chat.id === currentChatId);
   const currentTitle = currentChatTitle ? currentChatTitle.name : "Nouveau chat";
 
@@ -160,10 +161,10 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
           {messages.map((msg, i) => (
             <div
               key={i}
-              className={`p-4 max-w-[70%]
+              className={`p-4
               ${msg.sender === "user"
-                  ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none"
-                  : "self-start"
+                  ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none max-w-[70%]"
+                  : "self-start w-full"
                 }`}
             >
               {msg.text}
