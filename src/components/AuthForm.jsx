@@ -8,10 +8,10 @@ export default function AuthForm() {
     const [isRegister, setIsRegister] = useState(false);
 
     return (
-        <div>
+        <div className="flex items-start justify-center bg-blue-200 min-h-screen w-full pt-20">
 
             {/* SHOW REGISTER OR LOGIN FORM */}
-            <form action="">
+            <form action="" className=" flex flex-col items-center h-auto bg-red-600">
                 <legend>Connexion</legend>
                 <fieldset>
 
