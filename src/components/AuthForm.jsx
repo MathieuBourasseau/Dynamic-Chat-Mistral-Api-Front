@@ -9,7 +9,7 @@ export default function AuthForm() {
     const [isRegister, setIsRegister] = useState(false);
 
     return (
-        <div className="flex items-start justify-center bg-[#003c57] min-h-screen w-full pt-20">
+        <div className="flex items-start justify-center min-h-screen w-full pt-20">
 
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form 
