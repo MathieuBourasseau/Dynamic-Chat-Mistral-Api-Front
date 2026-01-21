@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaUserCircle } from "react-icons/fa";
 import { FaAt } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 export default function AuthForm() {
 
@@ -42,7 +43,7 @@ export default function AuthForm() {
                             placeholder="Mot de passe" 
                             className="outline-none"
                         />
-                        <FaAt />
+                        <FaEye />
                     </div>
 
                     <p>Pas encore de compte ? S'inscrire</p>
