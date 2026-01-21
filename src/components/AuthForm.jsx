@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { FaUserCircle } from "react-icons/fa";
 import { FaAt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import ParticlesBackground from "./ParticlesBackground";
+
 
 export default function AuthForm() {
 
@@ -9,12 +11,14 @@ export default function AuthForm() {
     const [isRegister, setIsRegister] = useState(false);
 
     return (
-        <div className="flex items-start justify-center min-h-screen w-full pt-20">
+        <div className="relative flex items-start justify-center min-h-screen w-full pt-20">
+
+            <ParticlesBackground />
 
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form 
                 action="" 
-                className="flex flex-col items-center h-auto bg-transparent border-1 border-gray-300 p-6 rounded-xl gap-4">
+                className="z-10 flex flex-col items-center h-auto bg-transparent border-1 border-gray-300 p-6 rounded-xl gap-4">
                 <legend className="text-lg font-bold text-white">Connexion</legend>
                 <fieldset className="flex flex-col gap-4">
 
