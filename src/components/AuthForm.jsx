@@ -13,31 +13,34 @@ export default function AuthForm() {
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form action="" className="flex flex-col items-center h-auto bg-red-600 p-6 rounded-xl gap-4">
                 <legend className="">Connexion</legend>
-                <fieldset>
+                <fieldset className="flex flex-col gap-4">
 
                     {/* USERNAME INPUT */}
-                    <div>
+                    <div className="flex items-center p-2 justify-between border-2 rounded-xl">
                         <input 
                             type="text" 
                             placeholder="Nom d'utilisateur" 
+                            className="outline-none"
                         />
                         <FaUserCircle />
                     </div>
 
                     {/* EMAIL INPUT */}
-                    <div>
+                    <div className="flex items-center p-2 justify-between border-2 rounded-xl">
                         <input 
                             type="email" 
                             placeholder="monadresse@mail.com" 
+                            className="outline-none"
                         />
                         <FaAt />
                     </div>
 
                     {/* PASSWORD INPUT */}
-                   <div>
+                   <div className="flex items-center p-2 justify-between border-2 rounded-xl">
                         <input 
                             type="password" 
                             placeholder="Mot de passe" 
+                            className="outline-none"
                         />
                         <FaAt />
                     </div>
