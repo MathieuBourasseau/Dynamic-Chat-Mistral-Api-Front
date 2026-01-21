@@ -64,9 +64,11 @@ export default function AuthForm() {
                     </button>
 
                     {/* REGISTER */}
-                    <button>
+                    <button
+                        className="text-white"
+                    >
                         Pas encore de compte ? {''} 
-                        <span className="font-bold">
+                        <span className="font-bold cursor-pointer">
                            S'inscrire
                         </span>
                     </button>
