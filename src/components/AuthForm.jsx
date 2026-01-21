@@ -11,8 +11,8 @@ export default function AuthForm() {
         <div className="flex items-start justify-center bg-blue-200 min-h-screen w-full pt-20">
 
             {/* SHOW REGISTER OR LOGIN FORM */}
-            <form action="" className=" flex flex-col items-center h-auto bg-red-600">
-                <legend>Connexion</legend>
+            <form action="" className="flex flex-col items-center h-auto bg-red-600 p-6 rounded-xl gap-4">
+                <legend className="">Connexion</legend>
                 <fieldset>
 
                     {/* USERNAME INPUT */}
