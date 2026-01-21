@@ -58,7 +58,7 @@ export default function AuthForm() {
 
                     {/* CONNECTION */}
                     <button
-                        className="bg-gray-300 text-[#003c57] p-2 border-2 border-gray-300 font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-2 hover:border-gray-300 hover:text-white"
+                        className="bg-gray-300 text-[#003c57] p-2 border-2 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white"
                     >
                         Se connecter
                     </button>
