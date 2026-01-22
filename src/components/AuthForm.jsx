@@ -18,6 +18,19 @@ export default function AuthForm() {
     // --- SHOW REGISTER FORM ---
     const handleRegister = () => {
         setIsRegister(!isRegister)
+    };
+
+    // --- HANDLE CHANGE IN FORM INPUT --- 
+    const handleChange = (e) => {
+
+        // Get name and value from the targeted element
+        const { name, value } = e.target;
+
+        // Update the form with these new data
+        setIsFormData(formData => ({
+            ...formData, // previous form with data
+            [name] : value, // add key with value
+        }))
     }
 
     return (
@@ -38,6 +51,9 @@ export default function AuthForm() {
                             type="text"
                             placeholder="Nom d'utilisateur"
                             className="placeholder-white text-white outline-none"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
                         />
                         <FaUserCircle className="text-white" />
                     </div>
