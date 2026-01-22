@@ -23,7 +23,7 @@ export default function AuthForm() {
                 <fieldset className="flex flex-col gap-4">
 
                     {/* USERNAME INPUT */}
-                    <div className="flex items-center p-2 justify-between border-2 border-gray-300 rounded-xl text-sm bg-transparent">
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
                         <input 
                             type="text" 
                             placeholder="Nom d'utilisateur" 
@@ -33,7 +33,7 @@ export default function AuthForm() {
                     </div>
 
                     {/* EMAIL INPUT */}
-                    <div className="flex items-center p-2 justify-between border-2 border-gray-300 bg-transparent rounded-xl text-sm">
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
                         <input 
                             type="email" 
                             placeholder="monadresse@mail.com" 
@@ -43,7 +43,7 @@ export default function AuthForm() {
                     </div>
 
                     {/* PASSWORD INPUT */}
-                   <div className="flex items-center p-2 justify-between border-2 border-gray-300 bg-transparent rounded-xl text-sm">
+                   <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
                         <input 
                             type="password" 
                             placeholder="Mot de passe" 
@@ -53,16 +53,20 @@ export default function AuthForm() {
                     </div>
 
                     {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
-                    <div className="flex gap-2 text-sm text-white">
-                        <input type="checkbox" /> Se souvenir de moi
+                    <div className="flex items-center gap-4 text-[12px] text-white">
+                        <label htmlFor="" className="flex items-center gap-1">
+                            <input type="checkbox"className="cursor-pointer" /> 
+                            <span>Se souvenir de moi</span>
+                        </label>
                         <button
+                            type="button"
                             className="cursor-pointer font-bold"
                         >Mot de passe oublié ?</button>
                     </div>
 
                     {/* CONNECTION */}
                     <button
-                        className="bg-gray-300 text-[#003c57] p-2 border-2 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white"
+                        className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white"
                     >
                         Se connecter
                     </button>
@@ -70,6 +74,7 @@ export default function AuthForm() {
                     {/* REGISTER */}
                     <button
                         className="text-white"
+                        type="button"
                     >
                         Pas encore de compte ? {''} 
                         <span className="font-bold cursor-pointer">
