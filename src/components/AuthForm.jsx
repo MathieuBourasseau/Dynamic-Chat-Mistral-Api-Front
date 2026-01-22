@@ -21,70 +21,75 @@ export default function AuthForm() {
             <ParticlesBackground />
 
             {/* SHOW REGISTER OR LOGIN FORM */}
-            <form 
-                action="" 
+            <form
+                action=""
                 className="z-10 flex flex-col items-center h-auto bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 ">
-                <legend className="text-lg font-bold text-white">{isRegister ? "Inscription" : "Connexion" }</legend>
+                <legend className="text-lg font-bold text-white">{isRegister ? "Inscription" : "Connexion"}</legend>
                 <fieldset className="flex flex-col gap-4">
 
                     {/* USERNAME INPUT */}
                     <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
-                        <input 
-                            type="text" 
-                            placeholder="Nom d'utilisateur" 
+                        <input
+                            type="text"
+                            placeholder="Nom d'utilisateur"
                             className="placeholder-white outline-none"
                         />
                         <FaUserCircle className="text-white" />
                     </div>
 
                     {/* EMAIL INPUT */}
-                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
-                        <input 
-                            type="email" 
-                            placeholder="monadresse@mail.com" 
-                            className="placeholder-white outline-none"
-                        />
-                        <FaAt className="text-white" />
-                    </div>
+                    {isRegister && (
+                        <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                            <input
+                                type="email"
+                                placeholder="monadresse@mail.com"
+                                className="placeholder-white outline-none"
+                            />
+                            <FaAt className="text-white" />
+                        </div>
+                    )}
+
 
                     {/* PASSWORD INPUT */}
-                   <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
-                        <input 
-                            type="password" 
-                            placeholder="Mot de passe" 
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                        <input
+                            type="password"
+                            placeholder="Mot de passe"
                             className="placeholder-white outline-none"
                         />
                         <FaEye className="text-white" />
                     </div>
 
                     {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
-                    <div className="flex items-center gap-4 text-[12px] text-white">
-                        <label htmlFor="" className="flex items-center gap-1">
-                            <input type="checkbox"className="cursor-pointer" /> 
-                            <span>Se souvenir de moi</span>
-                        </label>
-                        <button
-                            type="button"
-                            className="cursor-pointer font-bold"
-                        >Mot de passe oublié ?</button>
-                    </div>
+                    {!isRegister && (
+                        <div className="flex items-center gap-4 text-[12px] text-white">
+                            <label htmlFor="" className="flex items-center gap-1">
+                                <input type="checkbox" className="cursor-pointer" />
+                                <span>Se souvenir de moi</span>
+                            </label>
+                            <button
+                                type="button"
+                                className="cursor-pointer font-bold"
+                            >Mot de passe oublié ?</button>
+                        </div>
+                    )}
 
-                    {/* CONNECTION */}
+
+                    {/* SWITCH TO CONNECTION OR REGISTER */}
                     <button
                         className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white"
                     >
-                        Se connecter
+                        {isRegister ? "S'inscrire" : "Se connecter"}
                     </button>
-
-                    {/* REGISTER */}
                     <button
                         className="text-white text-sm"
                         type="button"
                         onClick={handleRegister}
                     >
-                        Pas encore de compte ? {''} 
+                        {isRegister ? "Vous avez déjà un compte ? " : "Pas encore de compte ? "}
+                        {''}
                         <span className="font-bold cursor-pointer">
-                           S'inscrire
+                            {isRegister ? "Se connecter" : "S'inscrire"}
                         </span>
                     </button>
 
