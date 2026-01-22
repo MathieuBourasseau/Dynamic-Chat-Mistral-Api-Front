@@ -8,7 +8,10 @@ import ParticlesBackground from "./ParticlesBackground";
 export default function AuthForm() {
 
     // --- DEFINE STATES --- 
-    const [isRegister, setIsRegister] = useState(false);
+    const [isRegister, setIsRegister] = useState(false); // User is not connected by default
+
+    // --- SHOW REGISTER FORLM ---
+
 
     return (
         <div className="relative flex items-start justify-center min-h-screen w-full pt-20">
@@ -75,6 +78,7 @@ export default function AuthForm() {
                     <button
                         className="text-white text-sm"
                         type="button"
+                        onClick={handleRegister}
                     >
                         Pas encore de compte ? {''} 
                         <span className="font-bold cursor-pointer">
