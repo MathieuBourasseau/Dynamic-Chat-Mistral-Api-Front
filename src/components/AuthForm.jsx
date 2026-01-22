@@ -9,6 +9,11 @@ export default function AuthForm() {
 
     // --- DEFINE STATES --- 
     const [isRegister, setIsRegister] = useState(false); // User is not connected by default
+    const [formData, setIsFormData] = useState({
+        username: "",
+        email: "",
+        password:"",
+    }) // Form is empty by default
 
     // --- SHOW REGISTER FORM ---
     const handleRegister = () => {
@@ -32,7 +37,7 @@ export default function AuthForm() {
                         <input
                             type="text"
                             placeholder="Nom d'utilisateur"
-                            className="placeholder-white outline-none"
+                            className="placeholder-white text-white outline-none"
                         />
                         <FaUserCircle className="text-white" />
                     </div>
