@@ -8,7 +8,7 @@ function App() {
   // --- DEFINE THE STATES ---
   const [currentChatId, setCurrentChatId] = useState(null);
   const [chatsList, setChatsList] = useState([]);
-  const [user, setUser] = useState(''); // No user by default
+  const [user, setUser] = useState(null); // No user by default
 
   // --- SHOW ALL THE CHATS HISTORY ---
   useEffect(() => {
@@ -41,11 +41,11 @@ function App() {
 
       {/* DISPLAY FORM IF USER IS NOT CONNECTED */}
       {!user ? (
-        <AuthForm />
+        <AuthForm onLogin={setUser}  />
       ) : (
         <>
-          <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} />
-          <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} />
+          <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
+          <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
         </>
       )}
 
