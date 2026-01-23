@@ -6,7 +6,7 @@ import ParticlesBackground from "./ParticlesBackground";
 import { useNavigate } from "react-router-dom";
 
 
-export default function AuthForm() {
+export default function AuthForm({onLogin}) {
 
     // --- DEFINE STATES --- 
     const [isRegister, setIsRegister] = useState(false); // User is not connected by default
@@ -77,6 +77,7 @@ export default function AuthForm() {
             
             setTimeout(() => {
                 localStorage.setItem("token", data.token);
+                onLogin(data.user);
                 setSuccessMessage('');
                 navigate('/')
             }, 2000);
