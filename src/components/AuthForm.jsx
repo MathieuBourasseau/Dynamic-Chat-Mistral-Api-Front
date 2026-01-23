@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaAt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import ParticlesBackground from "./ParticlesBackground";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AuthForm() {
@@ -14,6 +15,9 @@ export default function AuthForm() {
         email: "",
         password: "",
     }) // Form is empty by default
+    const [successMessage, setSuccessMessage] = useState(''); // Success message is empty by default
+    
+    const navigate = useNavigate()
 
     // --- SHOW REGISTER FORM ---
     const handleRegister = () => {
@@ -33,8 +37,52 @@ export default function AuthForm() {
         }));
     };
 
-    // --- URL VARIABLE ---
-    let url = "http://localhost:3001/api/login";
+    // --- HANDLE SUBMIT IN FORM --- 
+    const handleSubmit = async (e) => {
+
+        e.preventDefault() // Prevent the default reset action of form 
+
+        // --- URL VARIABLE ---
+        const url = isRegister ? "http://localhost:3001/api/signup" : "http://localhost:3001/api/login";
+
+        // Fetch data to the backend
+        const response = await fetch (url, {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        // Verify if the fetch is working
+        if(!response.ok) {
+            console.log("Erreur :", data.message);
+            return;
+        }
+        
+        setSuccessMessage(data.message);
+
+        if(isRegister) {
+
+            // Reset success message and redirect toward login form
+            setTimeout(() => {
+                setIsRegister(false);
+                setSuccessMessage('');
+            }, 2000);
+
+        } else {
+            // Save token to localStorage, reset the success message and redirect toward user Chat
+            
+            setTimeout(() => {
+                localStorage.setItem("token", data.token);
+                setSuccessMessage('');
+                navigate('/')
+            }, 2000);
+        }
+
+    }
 
     return (
         <div className="relative flex items-start justify-center min-h-screen w-full pt-20">
@@ -43,7 +91,7 @@ export default function AuthForm() {
 
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form
-                action=""
+                onSubmit={handleSubmit}
                 className="z-10 flex flex-col items-center h-auto bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 ">
                 <legend className="text-lg font-bold text-white">{isRegister ? "Inscription" : "Connexion"}</legend>
                 <fieldset className="flex flex-col gap-4">
@@ -125,31 +173,13 @@ export default function AuthForm() {
 
                 </fieldset>
             </form>
+            
+            {/* SUCCESS MESSAGE */}
+            {successMessage && (
+                <span>{successMessage}</span>
+            )}
         </div>
     )
 }
 
-
-
-// Objectif : créer un composant authForm.jsx qui est capable de détecter s'il s'agit d'une connexion ou d'une inscription et qui s'affiche uniquement si la personne n'est pas connectée.
-
-// Logique à suivre pour développer cette fonctionnalité : 
-
-// 1 - Créer les formulaires :
-
-// Affichage conditionnel du formulaire d'inscription :
-
-// On définit un état const [isRegister, setIsRegister] = useState(false);
-// Si l'utilisateur clique sur s'inscrire : setIsRegister(!isRegister)
-// On affiche alors le formulaire d'inscription.
-// On récupère les valeurs saisies par l'utilisateur dans les inputs (onChange)
-// Au submit du formulaire on fait un fetch vers la route d'inscription du backend (http://localhost:3001/api/signup)
-// Puis on redirige l'utilisateur vers la page de connexion
-
-// Affichage par défaut du formulaire de connexion (avec un message qui permet de s'inscrire si on n'est pas inscrit) :
-
-// Si isRegister vaut false, alors on affiche par défaut le formulaire de connexion.
-// On récupère les données saisies par l'utilisateur
-// Au submit on fait un fetch vers la bonne url du backend (http://localhost:3001/api/login)
-// L'objet JSON récupéré contiendra le payload (données utilisateur) + le token
 
