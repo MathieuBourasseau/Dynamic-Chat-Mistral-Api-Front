@@ -34,6 +34,7 @@ export default function AuthForm() {
     };
 
     // --- URL VARIABLE ---
+    let url = "http://localhost:3001/api/login";
 
     return (
         <div className="relative flex items-start justify-center min-h-screen w-full pt-20">
