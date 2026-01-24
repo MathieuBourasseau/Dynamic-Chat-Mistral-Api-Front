@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 
-export default function Header() {
+export default function Header({isOpen, setIsOpen}) {
 
     const [isOpen, setIsOpen] = useState(false);
 
