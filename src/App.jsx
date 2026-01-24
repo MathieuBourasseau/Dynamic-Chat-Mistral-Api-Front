@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import Panel from './components/Panel'
 import Chat from "./components/Chat"
 import AuthForm from "./components/AuthForm";
-import Header from "./Header";
-
+import Header from "./components/Header";
 function App() {
 
   // --- DEFINE THE STATES ---
@@ -51,7 +50,7 @@ function App() {
         <AuthForm onLogin={setUser} />
       ) : (
         <>
-          <Header />
+          <Header isOpen={isOpen} setIsOpen={setIsOpen} />
           <Panel className="hidden lg:block" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
           <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
         </>
