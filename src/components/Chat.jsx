@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowUp } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Header from "./Header";
+
 
 export default function Chat({ currentChatId, setCurrentChatId, setChatsList, chatsList, user }) {
 
@@ -148,7 +148,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
     return (
         <div>
             <main className={`flex flex-col flex-1 gap-8 h-screen items-center ${!currentChatId ? "justify-center" : ""} p-4`}>
-                
+
                 {/* CHAT TITLE */}
                 {currentChatId && (
                     <header className="p-4 border-b">

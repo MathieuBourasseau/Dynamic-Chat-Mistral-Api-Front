@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Panel from './components/Panel'
 import Chat from "./components/Chat"
 import AuthForm from "./components/AuthForm";
+import Header from "./Header";
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);  // Menu is closed by default
 
   // --- OPEN/CLOSE MENU --- 
-  const togglePanel = () => {
+  const toggle = () => {
     setIsOpen(!isOpen)
   };
 
@@ -50,6 +51,7 @@ function App() {
         <AuthForm onLogin={setUser} />
       ) : (
         <>
+          <Header />
           <Panel className="hidden lg:block" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
           <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
         </>
