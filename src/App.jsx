@@ -38,7 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col h-screen overflow-hidden">
 
       {/* DISPLAY FORM IF USER IS NOT CONNECTED */}
       {!user ? (
@@ -46,8 +46,10 @@ function App() {
       ) : (
         <>
           <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-          <Panel className="" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
-          <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
+          <main className="flex flex-1 overflow-hidden relative">
+            <Panel className="" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
+            <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
+          </main>
         </>
       )}
 
