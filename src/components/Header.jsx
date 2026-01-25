@@ -1,14 +1,7 @@
-import React, { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 
-export default function Header({isOpen, setIsOpen}) {
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
+export default function Header({isOpen, setIsOpen, }) {
 
     return (
         <header className="p-4">
@@ -17,7 +10,7 @@ export default function Header({isOpen, setIsOpen}) {
             <nav
                 className="flex items-center justify-between lg:hidden">
                 <button
-                    onClick={toggleMenu}
+                    onClick={() => setIsOpen(!isOpen)}
                     className="cursor-pointer"
                 >  
                     {isOpen ? <ImCross className="text-[#003C57]" /> : <GiHamburgerMenu className="text-[#003C57]" />  }

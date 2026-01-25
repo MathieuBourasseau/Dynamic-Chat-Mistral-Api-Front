@@ -11,11 +11,6 @@ function App() {
   const [user, setUser] = useState(null); // No user by default
   const [isOpen, setIsOpen] = useState(false);  // Menu is closed by default
 
-  // --- OPEN/CLOSE MENU --- 
-  const toggle = () => {
-    setIsOpen(!isOpen)
-  };
-
   // --- SHOW ALL THE CHATS HISTORY ---
   useEffect(() => {
 
@@ -43,7 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div className="flex">
+    <div>
 
       {/* DISPLAY FORM IF USER IS NOT CONNECTED */}
       {!user ? (
@@ -51,7 +46,7 @@ function App() {
       ) : (
         <>
           <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-          <Panel className="hidden lg:block" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
+          <Panel className="" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
           <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
         </>
       )}
