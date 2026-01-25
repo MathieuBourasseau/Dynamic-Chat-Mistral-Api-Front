@@ -214,7 +214,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                         className="self-end cursor-pointer bg-[#f8532a] p-2"
                         type="submit"
                     >
-                        <FaArrowUp className="text-white" />
+                        <FaArrowUp className="text-[12px] text-white md:text-base" />
                     </button>
                 </div>
             </form>
