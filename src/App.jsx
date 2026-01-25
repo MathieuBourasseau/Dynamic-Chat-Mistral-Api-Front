@@ -47,7 +47,7 @@ function App() {
         <>
           <Header isOpen={isOpen} setIsOpen={setIsOpen} />
           <main className="flex flex-1 overflow-hidden relative">
-            <Panel className="" setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} />
+            <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
             <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
           </main>
         </>

@@ -6,7 +6,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import PanelButton from "./PanelButton";
 
 
-export default function Panel({ setCurrentChatId, chatsList, setChatsList, user, className }) {
+export default function Panel({ setCurrentChatId, chatsList, setChatsList, user, isOpen, setIsOpen, className }) {
 
     return (
         <aside
@@ -19,7 +19,7 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList, user,
             <div className="flex justify-between items-center">
 
                 <PanelButton
-                    onClick={togglePanel}
+                    onClick={() => setIsOpen(!isOpen)}
                     icon={isOpen ? <ImCross className="text-white" /> : <GiHamburgerMenu className="text-white" />}
                     show={true}
                 />
@@ -37,7 +37,7 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList, user,
             <div>
                 <button
                     onClick={() => {
-                        togglePanel();
+                        setIsOpen(!isOpen)
                         setCurrentChatId(null) // Put ID to null to start a new chat
                     }}
                     className="flex items-center gap-4 cursor-pointer font-bold whitespace-nowrap overflow-hidden "
