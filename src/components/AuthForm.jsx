@@ -54,16 +54,44 @@ export default function AuthForm({onLogin}) {
 
         e.preventDefault() // Prevent the default reset action of form 
 
-        // --- URL VARIABLE ---
+        // url variable
         const url = isRegister ? "http://localhost:3001/api/signup" : "http://localhost:3001/api/login";
 
+        // Variables in case of login or signup
+        let bodyContent;
+        let headersContent;
+
+        // If the user wants to sign up 
+        if(isRegister) {
+
+            const registerData = new FormData(); // Create an instance of FormData to send file to backend
+
+            // Add all data put in the form input 
+            registerData.append('username', formData.username);
+            registerData.append('email', formData.email);
+            registerData.append('password', formData.password);
+
+            // If user has selected a file as avatar we send it to backend 
+            if(selectedFile) {
+                registerData.append('avatar', selectedFile);
+            };
+
+            bodyContent = registerData; // registerData is bounded to bodyContent
+            headersContent = {}; // We let the browser identify by itself the good content to put in headers
+
+        } else {
+
+            // If the user wants to login
+            bodyContent = JSON.stringify(formData); // Get all the value put in formData
+            headersContent = { "Content-Type" : "application/json" };
+
+        }
+        
         // Fetch data to the backend
         const response = await fetch (url, {
             method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify(formData),
+            headers: headersContent,
+            body: bodyContent,
         });
 
         const data = await response.json();
