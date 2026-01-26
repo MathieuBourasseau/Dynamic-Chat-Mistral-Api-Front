@@ -1,7 +1,7 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 
-export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, user  }) {
+export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, user }) {
 
     // Find the current chat 
     const currentChat = chatsList ? chatsList.find(c => c.id === currentChatId) : null;
@@ -18,8 +18,10 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="cursor-pointer"
-                >  
-                    {isOpen ? <ImCross className="text-[#003C57]" /> : <GiHamburgerMenu className="text-[#003C57]" />  }
+                >
+                    {!isOpen && (
+                        <GiHamburgerMenu className="text-[#003C57]" />
+                    )}
                 </button>
                 <h1 className="font-bold">{currentTitle}</h1>
                 <span>{user.username}</span>
@@ -33,7 +35,7 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                 {currentChat && (
                     <h2 className="font-bold">{currentTitle}</h2>
                 )}
-                
+
                 <span>user</span>
             </nav>
         </header>
