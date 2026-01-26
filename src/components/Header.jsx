@@ -23,17 +23,19 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                         <GiHamburgerMenu className="text-[#003C57]" />
                     )}
                 </button>
-                <h1 className="font-bold">{currentTitle}</h1>
-                <span>{user.username}</span>
+                <h1 className="font-bold text-[#003c57]">{currentTitle}</h1>
+
+                {/* Display the first letter of username in user area */}
+                <span>{user.username[0].toUpperCase()}</span>
             </nav>
 
             {/* DESKTOP NAV */}
             <nav className="hidden lg:block lg:flex lg:justify-between">
-                <h1>Projet portfolio LLM</h1>
+                <h1 className="text-[#003c57]">Projet portfolio LLM</h1>
 
                 {/* SHOW CHAT TITLE IF EXISTING */}
                 {currentChat && (
-                    <h2 className="font-bold">{currentTitle}</h2>
+                    <h2 className="font-bold truncate">{currentTitle}</h2>
                 )}
 
                 <span>user</span>

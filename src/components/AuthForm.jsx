@@ -140,6 +140,17 @@ export default function AuthForm({onLogin}) {
                         <FaEye className="text-white" />
                     </div>
 
+                    {/* AVATAR INPUT */}
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                        <input
+                            type="file"
+                            placeholder="Choisir une image de profil"
+                            className="bg-transparent placeholder-white text-white outline-none"
+                            name="avatar"
+                        />
+                        <FaEye className="text-white" />
+                    </div>
+
                     {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
                     {!isRegister && (
                         <div className="flex items-center gap-4 text-[12px] text-white">
