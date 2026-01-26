@@ -11,6 +11,7 @@ export default function AuthForm({onLogin}) {
 
     // --- DEFINE STATES --- 
     const [isRegister, setIsRegister] = useState(false); // User is not connected by default
+    const [selectedFile, setSelectedFile] = useState(null); // By default none file is selected
     const [formData, setFormData] = useState({
         username: "",
         email: "",
