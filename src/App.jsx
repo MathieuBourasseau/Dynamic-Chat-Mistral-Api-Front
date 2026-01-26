@@ -38,7 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`relative flex flex-row h-screen overflow-hidden ${user ? "bg-[#003c57]" : ""}`}>
+    <div className={`relative flex flex-row h-screen overflow-hidden ${user ? "bg-[#003c57] lg:bg-transparent" : ""}`}>
       {/* DISPLAY FORM IF USER IS NOT CONNECTED */}
       {!user ? (
         <AuthForm onLogin={setUser} />

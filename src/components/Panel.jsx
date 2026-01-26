@@ -13,9 +13,10 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList, user,
             className={`
                 ${className} 
                 h-full flex flex-col gap-8 bg-[#003c57]
-                w-[350px] shrink-0 p-4 transition-none
+                w-[350px] shrink-0 p-4 transition-all duration-300 ease-in-out
                 absolute top-0 left-0 z-0
                 lg:relative lg:z-auto lg:block
+                ${isOpen ? "lg:w-[350px]" : "lg:w-[50px]"}
             `}
         >
 
