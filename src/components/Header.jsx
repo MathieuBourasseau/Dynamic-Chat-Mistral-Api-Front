@@ -1,4 +1,3 @@
-import { h1 } from "framer-motion/client";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 
@@ -24,6 +23,18 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                 </button>
                 <h1 className="font-bold">{currentTitle}</h1>
                 <span>{user.username}</span>
+            </nav>
+
+            {/* DESKTOP NAV */}
+            <nav className="hidden lg:block lg:flex lg:justify-between">
+                <h1>Projet portfolio LLM</h1>
+
+                {/* SHOW CHAT TITLE IF EXISTING */}
+                {currentChat && (
+                    <h2 className="font-bold">{currentTitle}</h2>
+                )}
+                
+                <span>user</span>
             </nav>
         </header>
     )
