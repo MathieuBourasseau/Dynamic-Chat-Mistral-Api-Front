@@ -209,7 +209,7 @@ export default function AuthForm({setUser}) {
 
                     {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
                     {!isRegister && (
-                        <div className="flex items-center gap-4 text-[12px] text-white">
+                        <div className="flex items-center  gap-4 text-[12px] text-white">
                             <label htmlFor="" className="flex items-center gap-1">
                                 <input 
                                     type="checkbox" 
@@ -220,10 +220,11 @@ export default function AuthForm({setUser}) {
                                 />
                                 <span>Se souvenir de moi</span>
                             </label>
-                            <button
+                            {/* <button
                                 type="button"
                                 className="cursor-pointer font-bold"
-                            >Mot de passe oublié ?</button>
+                            >Mot de passe oublié ?
+                            </button> */}
                         </div>
                     )}
 
