@@ -24,13 +24,10 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                     )}
                 </button>
                 <h1 className="font-bold text-[#003c57]">{currentTitle}</h1>
-
-                {/* Display the first letter of username in user area */}
-                <span>{user.username[0].toUpperCase()}</span>
             </nav>
 
             {/* DESKTOP NAV */}
-            <nav className="hidden lg:block lg:flex lg:justify-between">
+            <nav className="hidden lg:block lg:flex lg:justify-between lg:items-center">
                 <h1 className="text-[#003c57]">Projet portfolio LLM</h1>
 
                 {/* SHOW CHAT TITLE IF EXISTING */}
@@ -38,7 +35,20 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                     <h2 className="font-bold truncate">{currentTitle}</h2>
                 )}
 
-                <span>user</span>
+                {/* SHOW USER AVATAR */}
+                {user.avatar ? (
+                    <span
+                        className="w-10 h-10 rounded-full flex items-center justify-center border border-[#003C57] shadow-sm"
+                    >
+                        <img src={user.avatar} alt="Avatar de l'utilisateur"/>
+                    </span>
+                ) : (
+                    <span
+                        className="w-10 h-10 rounded-full font-bold flex items-center justify-center border-3 border-[#003C57] shadow-sm"
+                    >
+                        {user.username[0].toUpperCase()}
+                    </span>
+                )}
             </nav>
         </header>
     )
