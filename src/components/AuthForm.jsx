@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function AuthForm({setUser}) {
 
     // --- DEFINE STATES --- 
+
     const [isRegister, setIsRegister] = useState(false); // User is not connected by default
     const [selectedFile, setSelectedFile] = useState(null); // By default none file is selected
     const [formData, setFormData] = useState({
@@ -21,16 +22,19 @@ export default function AuthForm({setUser}) {
     const [isChecked, setIsChecked] = useState(false); // Remember me is not checked by default
     
     // --- NAVIGATION ---
+
     const navigate = useNavigate()
 
     // --- SHOW REGISTER FORM ---
+
     const handleRegister = () => {
         setIsRegister(!isRegister)
     };
 
     // --- HANDLE CHECKED --- 
+
     const handleChecked = (e) => {
-        setIsChecked(e.checked);
+        setIsChecked(e.target.checked);
     }  
 
     // --- HANDLE CHANGE IN FORM INPUT --- 
