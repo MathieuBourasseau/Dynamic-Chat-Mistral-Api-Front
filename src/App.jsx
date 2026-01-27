@@ -3,6 +3,7 @@ import Panel from './components/Panel'
 import Chat from "./components/Chat"
 import AuthForm from "./components/AuthForm";
 import Header from "./components/Header";
+import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
 
   // --- DEFINE THE STATES ---
@@ -38,22 +39,35 @@ function App() {
   }, []);
 
   return (
-    <div className={`relative flex flex-row h-screen overflow-hidden ${user ? "bg-[#003c57] lg:bg-black" : ""}`}>
-      {/* DISPLAY FORM IF USER IS NOT CONNECTED */}
-      {!user ? (
-        <AuthForm onLogin={setUser} />
-      ) : (
-        <>
-          <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
-          <div className={`transition-transform duration-300 bg-white flex flex-col flex-1 h-full z-10 ${isOpen ? "translate-x-[350px]" : "translate-x-0"} lg:translate-x-0`}>
-            <Header isOpen={isOpen} setIsOpen={setIsOpen} currentChatId={currentChatId} chatsList={chatsList} user={user} />
-            <div className="flex flex-1 overflow-hidden relative">
-              <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
-            </div>
-          </div>
-        </>
-      )}
 
+    <div className={`relative flex flex-row h-screen overflow-hidden ${user ? "bg-[#003c57] lg:bg-black" : ""}`}>
+
+      <Routes>
+        {!user ? (
+        <>
+          <Route path="/login" element={<AuthForm setUser={setUser} />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+        ) : (
+        <>
+          <Route
+            path="/chats"
+            element={
+              <>
+                <Panel setCurrentChatId={setCurrentChatId} chatsList={chatsList} setChatsList={setChatsList} user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
+                <div className={`transition-transform duration-300 bg-white flex flex-col flex-1 h-full z-10 ${isOpen ? "translate-x-[350px]" : "translate-x-0"} lg:translate-x-0`}>
+                  <Header isOpen={isOpen} setIsOpen={setIsOpen} currentChatId={currentChatId} chatsList={chatsList} user={user} setUser={setUser} />
+                  <div className="flex flex-1 overflow-hidden relative">
+                    <Chat currentChatId={currentChatId} setCurrentChatId={setCurrentChatId} setChatsList={setChatsList} chatsList={chatsList} user={user} />
+                  </div>
+                </div>
+              </>
+            }
+          />
+          <Route path="*" element={ <Navigate to="/chats"/> } />
+        </>
+        )}
+      </Routes>
     </div>
   )
 }

@@ -1,16 +1,29 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, user }) {
+export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, user, setUser }) {
 
     // --- DEFINE STATE ---
     const [isDisconnected, setIsDisconnected] = useState(false);
 
+    const navigate = useNavigate();
 
-    // --- FIND CURRENTCHAT AND ITS TITLE
+    // --- FIND CURRENT CHAT AND ITS TITLE
     const currentChat = chatsList ? chatsList.find(c => c.id === currentChatId) : null;
     const currentTitle = currentChat ? currentChat.name : "Projet LLM";
+
+    // --- HANDLE LOG OUT ---
+    const handleLogOut = () => {
+
+        setTimeout(() => {
+            setIsDisconnected(false);
+            localStorage.removeItem("token")
+            setUser(null);
+
+        }, 1000)
+    };
 
     return (
         <header className="p-4">
@@ -59,12 +72,13 @@ export default function Header({ isOpen, setIsOpen, currentChatId, chatsList, us
                 <div
                     className={
                         `z-50 bg-[#003C57] p-2 absolute lg:right-0 lg:top-full rounded-lg text-white transition-all duration-300
-                        ${isDisconnected ? "translate-y-2 opacity-100 pointer-events-auto" : "translate-y-0 opacity-0 pointer-events-none"}
+                        ${isDisconnected ? "translate-y-2 opacity-100 hover:bg-[#F8532A] pointer-events-auto" : "translate-y-0 opacity-0 pointer-events-none"}
                         `}
                 >
                     <button
                         type="button"
                         className="flex items-center gap-2 cursor-pointer"
+                        onClick={handleLogOut}
                     >
                         Déconnexion
                         <span><CiLogout /></span>
