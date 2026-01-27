@@ -11,7 +11,7 @@ export default function Panel({ setCurrentChatId, chatsList, setChatsList, user,
         <aside
             className={`
                 h-full flex flex-col gap-8 bg-[#003c57]
-                w-[350px] shrink-0 p-4 transition-all duration-300 ease-in-out
+                w-[350px] shrink-0 pl-4 pr-4 pt-6 transition-all duration-300 ease-in-out
                 absolute top-0 left-0 z-0
                 lg:relative lg:z-auto lg:flex lg:gap-6
                 ${isOpen ? "lg:w-[350px]" : "lg:w-[50px]"}
