@@ -5,6 +5,7 @@ import { FaAt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import ParticlesBackground from "./ParticlesBackground";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePicture } from "react-icons/ai";
 
 
 export default function AuthForm({setUser}) {
@@ -140,23 +141,23 @@ export default function AuthForm({setUser}) {
     }
 
     return (
-        <div className="relative flex flex-col gap-4 items-center justify-start min-h-screen w-full pt-20">
+        <div className="relative flex flex-col gap-4 items-center justify-start min-h-screen w-full pt-20 md:justify-center md:pt-0">
 
             <ParticlesBackground />
 
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form
                 onSubmit={handleSubmit}
-                className="z-10 flex flex-col items-center h-auto bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 ">
-                <legend className="text-lg font-bold text-white">{isRegister ? "Inscription" : "Connexion"}</legend>
-                <fieldset className="flex flex-col gap-4">
+                className="z-10 flex flex-col items-center h-auto bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 md:max-h-[400px] md:h-full md:max-w-[450px] md:w-full ">
+                <legend className="text-lg font-bold text-white md:text-2xl lg:text-3xl">{isRegister ? "Inscription" : "Connexion"}</legend>
+                <fieldset className="flex flex-col gap-4 md:justify-center md:max-w-[350px] md:w-full">
 
                     {/* USERNAME INPUT */}
-                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
                         <input
                             type="text"
                             placeholder="Nom d'utilisateur"
-                            className="bg-transparent placeholder-white text-white outline-none"
+                            className="bg-transparent placeholder-white text-white outline-none w-full"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
@@ -166,11 +167,11 @@ export default function AuthForm({setUser}) {
 
                     {/* EMAIL INPUT */}
                     {isRegister && (
-                        <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                        <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
                             <input
                                 type="email"
                                 placeholder="monadresse@mail.com"
-                                className="bg-transparent placeholder-white text-white outline-none"
+                                className="bg-transparent placeholder-white text-white outline-none w-full"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -180,11 +181,11 @@ export default function AuthForm({setUser}) {
                     )}
 
                     {/* PASSWORD INPUT */}
-                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent  md:text-base lg:text-lg">
                         <input
                             type="password"
                             placeholder="Mot de passe"
-                            className="bg-transparent placeholder-white text-white outline-none"
+                            className="bg-transparent placeholder-white text-white outline-none w-full"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
@@ -194,22 +195,31 @@ export default function AuthForm({setUser}) {
 
                     {/* AVATAR INPUT */}
                     {isRegister && (
-                        <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent">
+                        <div className="flex items-center w-full">
                         <input
                             type="file"
-                            placeholder="Choisir une image de profil"
-                            className="bg-transparent placeholder-white text-white outline-none"
+                            className="hidden"
                             name="avatar"
                             onChange={handleFile}
+                            id="avatar-upload"
                         />
-                        <FaEye className="text-white" />
+                        <label 
+                            htmlFor="avatar-upload"
+                            className="flex items-center w-full p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg"
+                        >
+                            <span className="text-white">
+                                {selectedFile ? selectedFile.name : "Ajouter une photo de profil"}
+                            </span>
+
+                        <AiOutlinePicture className="text-white" />
+                        </label>
                     </div>
                     )}
                     
 
                     {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
                     {!isRegister && (
-                        <div className="flex items-center  gap-4 text-[12px] text-white">
+                        <div className="flex items-center  gap-4 text-[12px] text-white md:text-base lg:text-lg">
                             <label htmlFor="" className="flex items-center gap-1">
                                 <input 
                                     type="checkbox" 
@@ -231,12 +241,12 @@ export default function AuthForm({setUser}) {
 
                     {/* SWITCH TO CONNECTION OR REGISTER */}
                     <button
-                        className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white"
+                        className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white md:text-base lg:text-lg"
                     >
                         {isRegister ? "S'inscrire" : "Se connecter"}
                     </button>
                     <button
-                        className="text-white text-sm"
+                        className="text-white text-sm  md:text-base lg:text-lg"
                         type="button"
                         onClick={handleRegister}
                     >
