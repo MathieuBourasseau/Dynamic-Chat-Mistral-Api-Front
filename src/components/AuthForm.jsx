@@ -95,8 +95,8 @@ export default function AuthForm({setUser}) {
                 ...formData,
                 rememberMe : isChecked,
             };
-            
-            bodyContent = JSON.stringify(formData); // Get all the value put in formData
+
+            bodyContent = JSON.stringify(loginData); // Get all the value put in formData
             headersContent = { "Content-Type" : "application/json" };
 
         }
