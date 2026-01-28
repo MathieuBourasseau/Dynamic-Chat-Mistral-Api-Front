@@ -11,6 +11,9 @@ export default function ResetPassword() {
     const [message, setMessage] = useState(''); // By default no message
     const [showPassword, setShowPassword] = useState(false); // Password hidden by default
     
+    const handleChange = (e) => {
+        setShowPassword(e.target.value)
+    };
 
     return (
         <form>
@@ -18,6 +21,8 @@ export default function ResetPassword() {
                 <input
                     type={ showPassword ? "text" : "password"}
                     placeholder="Nouveau mot de passe"
+                    value={password}
+                    onChange={handleChange}
                 />
                 <span
                     className="cursor-pointer text-white"
@@ -33,7 +38,7 @@ export default function ResetPassword() {
             <button
                 type="submit"
             >
-
+                Changer le mot de passe
             </button>
         </form>
     )
