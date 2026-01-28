@@ -79,7 +79,7 @@ export default function AuthForm({ setUser }) {
 
         e.preventDefault() // Prevent the default reset action of form 
 
-        const API_BASE_URL = "https://backend-chatbot-v3xr.onrender.com/api";
+        const API_BASE_URL = import.meta.env.VITE_API_URL;
 
         // Variables in case of login or signup or forgot password
         let url

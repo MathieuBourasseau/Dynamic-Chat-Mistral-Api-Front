@@ -18,9 +18,13 @@ export default function ResetPassword() {
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
+        
+        const baseUrl = import.meta.env.VITE_API_URL;
+
         try {
-            const response = await fetch(`https://backend-chatbot-v3xr.onrender.com/api/reset-password/${token}`, {
+            const response = await fetch(`${baseUrl}/reset-password/${token}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ password })
