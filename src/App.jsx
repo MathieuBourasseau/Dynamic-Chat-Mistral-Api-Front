@@ -84,6 +84,7 @@ function App() {
         {!user ? (
           <>
             <Route path="/login" element={<AuthForm setUser={setUser} />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </>
         ) : (
