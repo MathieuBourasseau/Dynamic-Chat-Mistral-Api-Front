@@ -79,8 +79,7 @@ export default function AuthForm({ setUser }) {
 
         e.preventDefault() // Prevent the default reset action of form 
 
-        // // url variable
-        // const url = isRegister ? "http://localhost:3001/api/signup" : "http://localhost:3001/api/login";
+        const API_BASE_URL = "https://backend-chatbot-v3xr.onrender.com/api";
 
         // Variables in case of login or signup or forgot password
         let url
@@ -91,7 +90,7 @@ export default function AuthForm({ setUser }) {
         if (isForgotPassword) {
 
             // fetching towards password route
-            url = "http://localhost:3001/api/forgot-password";
+            url = `${API_BASE_URL}/forgot-password`;
 
             // Send JSON
             headersContent = { "Content-Type" : "application/json" };
@@ -104,7 +103,7 @@ export default function AuthForm({ setUser }) {
             // If user wants to sign up
             
             // Fetching towards sign up route
-            url = "http://localhost:3001/api/signup";
+            url = `${API_BASE_URL}/signup`;
 
             const registerData = new FormData(); // Create an instance of FormData to send file to backend
 
@@ -126,7 +125,7 @@ export default function AuthForm({ setUser }) {
              // If the user wants to login
             
              // Fetch towards login route
-             url = "http://localhost:3001/api/login";
+             url = `${API_BASE_URL}/login`;
 
             // isChecked state is added a this moment
             const loginData = {
