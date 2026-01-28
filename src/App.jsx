@@ -3,6 +3,7 @@ import Panel from './components/Panel'
 import Chat from "./components/Chat"
 import AuthForm from "./components/AuthForm";
 import Header from "./components/Header";
+import ResetPassword from "./components/ResetPassword";
 import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
 

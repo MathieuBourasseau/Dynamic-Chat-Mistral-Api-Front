@@ -313,7 +313,7 @@ export default function AuthForm({ setUser }) {
 
                             {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
                             {!isRegister && (
-                                <div className="flex items-center  gap-4 text-[12px] text-white md:text-base lg:text-lg">
+                                <div className="flex items-center  gap-4 text-[12px] text-white md:text-base md:gap-6">
                                     <label htmlFor="" className="flex items-center gap-2">
                                         <input
                                             type="checkbox"
