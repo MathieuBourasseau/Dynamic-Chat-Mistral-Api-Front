@@ -221,6 +221,15 @@ export default function AuthForm({ setUser }) {
                         )}
                     </div>
 
+                    {/* PREVIEW URL */}
+                    { previewUrl && (
+                        <img 
+                            src={previewUrl}
+                            alt="" 
+                            className="w-20 h-20 rounded-full object-cover"
+                        />
+                    )}
+
                     {/* AVATAR INPUT */}
                     {isRegister && (
                         <div className="flex items-center w-full">
