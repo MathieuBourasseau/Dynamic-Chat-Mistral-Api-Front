@@ -22,6 +22,7 @@ export default function AuthForm({ setUser }) {
     const [isChecked, setIsChecked] = useState(false); // Remember me is not checked by default
     const [showPassword, setShowPassword] = useState(false); // Password is not shown by default 
     const [previewUrl, setPreviewUrl] = useState(null);
+    const [isForgotPassword, setIsForgotPassword] = useState(false); // Forgot password is falsy by default
 
     // --- NAVIGATION ---
     const navigate = useNavigate()
@@ -164,137 +165,174 @@ export default function AuthForm({ setUser }) {
             {/* SHOW REGISTER OR LOGIN FORM */}
             <form
                 onSubmit={handleSubmit}
-                className="z-10 flex flex-col items-center h-fit bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 md:max-w-[450px] md:w-full ">
-                <legend className="text-lg font-bold text-white md:text-2xl lg:text-3xl">{isRegister ? "Inscription" : "Connexion"}</legend>
-                <fieldset className="flex flex-col gap-4 md:justify-center md:max-w-[350px] md:w-full">
+                className="z-10 flex flex-col items-center h-fit bg-transparent backdrop-blur-xs border-1 border-gray-300 p-6 rounded-xl gap-4 md:max-w-[450px] md:w-full "
+            >
 
-                    {/* USERNAME INPUT */}
-                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
-                        <input
-                            type="text"
-                            placeholder="Nom d'utilisateur"
-                            className="bg-transparent placeholder-white text-white outline-none w-full autofill:bg-transparent transition-colors duration-[5000000s] ease-in-out"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                        />
-                        <FaUserCircle className="text-white" />
-                    </div>
-
-                    {/* EMAIL INPUT */}
-                    {isRegister && (
-                        <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
-                            <input
-                                type="email"
-                                placeholder="monadresse@mail.com"
-                                className="bg-transparent placeholder-white text-white outline-none w-full"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-                            <FaAt className="text-white" />
-                        </div>
-                    )}
-
-                    {/* PASSWORD INPUT */}
-                    <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent  md:text-base lg:text-lg">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Mot de passe"
-                            className="bg-transparent placeholder-white text-white outline-none w-full"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-
-                        {showPassword ? (
-                            <IoMdEyeOff
-                                className="cursor-pointer text-white"
-                                onClick={displayPassword}
-                            />
-                        ) : (
-
-                            <FaEye
-                                className="cursor-pointer text-white"
-                                onClick={displayPassword}
-                            />
-                        )}
-                    </div>
-
-                    {/* PREVIEW URL */}
-                    { previewUrl && (
-                        <img 
-                            src={previewUrl}
-                            alt="" 
-                            className="w-20 h-20 rounded-full object-cover"
-                        />
-                    )}
-
-                    {/* AVATAR INPUT */}
-                    {isRegister && (
-                        <div className="flex items-center w-full">
-                            <input
-                                type="file"
-                                className="hidden"
-                                name="avatar"
-                                onChange={handleFile}
-                                id="avatar-upload"
-                            />
-                            <label
-                                htmlFor="avatar-upload"
-                                className="cursor-pointer flex items-center w-full p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg"
-                            >
-                                <span className="text-white">
-                                    {selectedFile ? selectedFile.name : "Ajouter une photo de profil"}
-                                </span>
-
-                                <AiOutlinePicture className="text-white" />
-                            </label>
-                        </div>
-                    )}
-
-
-                    {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
-                    {!isRegister && (
-                        <div className="flex items-center  gap-4 text-[12px] text-white md:text-base lg:text-lg">
-                            <label htmlFor="" className="flex items-center gap-2">
+                {/* CASE 1 : FORGOT PASSWORD // CASE 2 : NORMAL LOGIN OR REGISTER */}
+                {isForgotPassword ? (
+                    <>
+                        <legend className="text-lg font-bold text-white md:text-2xl lg:text-3xl">Récupérer mot de passe</legend>
+                        <fieldset className="flex flex-col gap-4 md:justify-center md:max-w-[350px] md:w-full">
+                            <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
                                 <input
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    className="cursor-pointer"
-                                    onChange={handleChecked}
-                                    value={isChecked}
+                                    type="email"
+                                    placeholder="monadresse@mail.com"
+                                    className="bg-transparent placeholder-white text-white outline-none w-full"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                 />
-                                <span>Se souvenir de moi</span>
-                            </label>
-                            {/* <button
+                                <FaAt className="text-white" />
+                            </div>
+                            <button
+                                className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white md:text-base lg:text-lg"
+                            >
+                                envoyer un lien
+                            </button>
+                            <button
+                                className="text-white text-sm"
+                                onClick={() => setIsForgotPassword(false)}
+                            >
+                                Retour à la connexion
+                            </button>
+                        </fieldset>
+                    </>
+
+                ) : (
+                    <>
+                        <legend className="text-lg font-bold text-white md:text-2xl lg:text-3xl">{isRegister ? "Inscription" : "Connexion"}</legend>
+                        <fieldset className="flex flex-col gap-4 md:justify-center md:max-w-[350px] md:w-full">
+
+                            {/* USERNAME INPUT */}
+                            <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
+                                <input
+                                    type="text"
+                                    placeholder="Nom d'utilisateur"
+                                    className="bg-transparent placeholder-white text-white outline-none w-full autofill:bg-transparent transition-colors duration-[5000000s] ease-in-out"
+                                    name="username"
+                                    value={formData.username}
+                                    onChange={handleChange}
+                                />
+                                <FaUserCircle className="text-white" />
+                            </div>
+
+                            {/* EMAIL INPUT */}
+                            {isRegister && (
+                                <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
+                                    <input
+                                        type="email"
+                                        placeholder="monadresse@mail.com"
+                                        className="bg-transparent placeholder-white text-white outline-none w-full"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                    />
+                                    <FaAt className="text-white" />
+                                </div>
+                            )}
+
+                            {/* PASSWORD INPUT */}
+                            <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent  md:text-base lg:text-lg">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Mot de passe"
+                                    className="bg-transparent placeholder-white text-white outline-none w-full"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                />
+
+                                {showPassword ? (
+                                    <IoMdEyeOff
+                                        className="cursor-pointer text-white"
+                                        onClick={displayPassword}
+                                    />
+                                ) : (
+
+                                    <FaEye
+                                        className="cursor-pointer text-white"
+                                        onClick={displayPassword}
+                                    />
+                                )}
+                            </div>
+
+                            {/* PREVIEW URL */}
+                            {previewUrl && (
+                                <img
+                                    src={previewUrl}
+                                    alt=""
+                                    className="w-20 h-20 rounded-full object-cover"
+                                />
+                            )}
+
+                            {/* AVATAR INPUT */}
+                            {isRegister && (
+                                <div className="flex items-center w-full">
+                                    <input
+                                        type="file"
+                                        className="hidden"
+                                        name="avatar"
+                                        onChange={handleFile}
+                                        id="avatar-upload"
+                                    />
+                                    <label
+                                        htmlFor="avatar-upload"
+                                        className="cursor-pointer flex items-center w-full p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg"
+                                    >
+                                        <span className="text-white">
+                                            {selectedFile ? selectedFile.name : "Ajouter une photo de profil"}
+                                        </span>
+
+                                        <AiOutlinePicture className="text-white" />
+                                    </label>
+                                </div>
+                            )}
+
+
+                            {/* SAVE USER INFORMATION OR FORGOT PASSWORD */}
+                            {!isRegister && (
+                                <div className="flex items-center  gap-4 text-[12px] text-white md:text-base lg:text-lg">
+                                    <label htmlFor="" className="flex items-center gap-2">
+                                        <input
+                                            type="checkbox"
+                                            checked={isChecked}
+                                            className="cursor-pointer"
+                                            onChange={handleChecked}
+                                            value={isChecked}
+                                        />
+                                        <span>Se souvenir de moi</span>
+                                    </label>
+                                    <button
+                                        type="button"
+                                        className="cursor-pointer font-bold"
+                                        onClick={() => setIsForgotPassword(!isForgotPassword)}
+                                    >Mot de passe oublié ?
+                                    </button>
+                                </div>
+                            )}
+
+
+                            {/* SWITCH TO CONNECTION OR REGISTER */}
+                            <button
+                                className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white md:text-base lg:text-lg"
+                            >
+                                {isRegister ? "S'inscrire" : "Se connecter"}
+                            </button>
+                            <button
+                                className="text-white text-sm  md:text-base lg:text-lg"
                                 type="button"
-                                className="cursor-pointer font-bold"
-                            >Mot de passe oublié ?
-                            </button> */}
-                        </div>
-                    )}
+                                onClick={handleRegister}
+                            >
+                                {isRegister ? "Vous avez déjà un compte ? " : "Pas encore de compte ? "}
+                                {''}
+                                <span className="font-bold cursor-pointer">
+                                    {isRegister ? "Se connecter" : "S'inscrire"}
+                                </span>
+                            </button>
 
-
-                    {/* SWITCH TO CONNECTION OR REGISTER */}
-                    <button
-                        className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white md:text-base lg:text-lg"
-                    >
-                        {isRegister ? "S'inscrire" : "Se connecter"}
-                    </button>
-                    <button
-                        className="text-white text-sm  md:text-base lg:text-lg"
-                        type="button"
-                        onClick={handleRegister}
-                    >
-                        {isRegister ? "Vous avez déjà un compte ? " : "Pas encore de compte ? "}
-                        {''}
-                        <span className="font-bold cursor-pointer">
-                            {isRegister ? "Se connecter" : "S'inscrire"}
-                        </span>
-                    </button>
-
-                </fieldset>
+                        </fieldset>
+                    </>
+                )}
             </form>
 
             {/* SUCCESS MESSAGE */}
