@@ -79,15 +79,32 @@ export default function AuthForm({ setUser }) {
 
         e.preventDefault() // Prevent the default reset action of form 
 
-        // url variable
-        const url = isRegister ? "http://localhost:3001/api/signup" : "http://localhost:3001/api/login";
+        // // url variable
+        // const url = isRegister ? "http://localhost:3001/api/signup" : "http://localhost:3001/api/login";
 
-        // Variables in case of login or signup
+        // Variables in case of login or signup or forgot password
+        let url
         let bodyContent;
         let headersContent;
 
-        // If the user wants to sign up 
-        if (isRegister) {
+        // If password is forgotten 
+        if (isForgotPassword) {
+
+            // fetching towards password route
+            url = "http://localhost:3001/api/forgot-password";
+
+            // Send JSON
+            headersContent = { "Content-Type" : "application/json" };
+
+            // Send the email 
+            bodyContent = JSON.stringify({ email : formData.email });
+
+        } else if (isRegister) {
+
+            // If user wants to sign up
+            
+            // Fetching towards sign up route
+            url = "http://localhost:3001/api/signup";
 
             const registerData = new FormData(); // Create an instance of FormData to send file to backend
 
@@ -106,7 +123,10 @@ export default function AuthForm({ setUser }) {
 
         } else {
 
-            // If the user wants to login
+             // If the user wants to login
+            
+             // Fetch towards login route
+             url = "http://localhost:3001/api/login";
 
             // isChecked state is added a this moment
             const loginData = {
@@ -116,8 +136,8 @@ export default function AuthForm({ setUser }) {
 
             bodyContent = JSON.stringify(loginData); // Get all the value put in formData
             headersContent = { "Content-Type": "application/json" };
+        };
 
-        }
 
         // Fetch data to the backend
         const response = await fetch(url, {
@@ -173,11 +193,11 @@ export default function AuthForm({ setUser }) {
                     <>
                         <legend className="text-lg font-bold text-white md:text-2xl lg:text-3xl">Récupérer mot de passe</legend>
                         <fieldset className="flex flex-col gap-4 md:justify-center md:max-w-[350px] md:w-full">
-                            <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent md:text-base lg:text-lg">
+                            <div className="flex items-center p-4 justify-between border-1 border-gray-300 rounded-full text-sm bg-transparent  md:text-base lg:text-lg">
                                 <input
                                     type="email"
                                     placeholder="monadresse@mail.com"
-                                    className="bg-transparent placeholder-white text-white outline-none w-full"
+                                    className="bg-transparent placeholder-white text-white outline-none w-full autofill:bg-transparent transition-colors duration-[5000000s]"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
@@ -186,12 +206,14 @@ export default function AuthForm({ setUser }) {
                             </div>
                             <button
                                 className="bg-gray-300 text-[#003c57] p-2 border-1 border-transparent font-bold rounded-full cursor-pointer hover:bg-transparent hover:border-gray-300 hover:text-white md:text-base lg:text-lg"
+                                type="submit"
                             >
                                 envoyer un lien
                             </button>
                             <button
-                                className="text-white text-sm"
+                                className="text-white text-sm cursor-pointer"
                                 onClick={() => setIsForgotPassword(false)}
+                                type="button"
                             >
                                 Retour à la connexion
                             </button>
