@@ -7,6 +7,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import ParticlesBackground from "./ParticlesBackground";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePicture } from "react-icons/ai";
+import { GoAlert } from "react-icons/go";
 
 export default function AuthForm({ setUser }) {
 
@@ -94,15 +95,15 @@ export default function AuthForm({ setUser }) {
             url = `${API_BASE_URL}/forgot-password`;
 
             // Send JSON
-            headersContent = { "Content-Type" : "application/json" };
+            headersContent = { "Content-Type": "application/json" };
 
             // Send the email 
-            bodyContent = JSON.stringify({ email : formData.email });
+            bodyContent = JSON.stringify({ email: formData.email });
 
         } else if (isRegister) {
 
             // If user wants to sign up
-            
+
             // Fetching towards sign up route
             url = `${API_BASE_URL}/signup`;
 
@@ -123,10 +124,10 @@ export default function AuthForm({ setUser }) {
 
         } else {
 
-             // If the user wants to login
-            
-             // Fetch towards login route
-             url = `${API_BASE_URL}/login`;
+            // If the user wants to login
+
+            // Fetch towards login route
+            url = `${API_BASE_URL}/login`;
 
             // isChecked state is added a this moment
             const loginData = {
@@ -360,15 +361,24 @@ export default function AuthForm({ setUser }) {
                 )}
             </form>
 
-            {/* SUCCESS MESSAGE */}
-            {successMessage && (
-                <span
-                    className="flex items-center border-1 border-gray-300 text-gray-300 gap-2 rounded-full text-sm p-2"
-                >
-                    {successMessage}
-                    <FaCheckCircle />
-                </span>
-            )}
+            {/* SUCCESS OR ERROR MESSAGE */}
+            <span
+                className="flex items-center border-1 border-gray-300 text-gray-300 gap-2 rounded-full text-sm p-2"
+            >
+                {successMessage ? (
+                    <>
+                        {successMessage}
+                        < FaCheckCircle />
+                    </>
+
+                ) : (
+                    <>
+                        {errorMessage}
+                        <GoAlert />
+                    </>
+                )}
+            </span>
+
         </div>
     )
 }
