@@ -74,10 +74,20 @@ function App() {
 
         const data = await response.json();
 
-        setChatsList(data); // Show all the conversation in the panel
+        // Verify that answer is an array before updating the state
+        if (response.ok && Array.isArray(data)) {
+
+          setChatsList(data);
+          
+        } else {
+          // if there is an arror we update chat lists to empty
+          console.error("Erreur API ou format de données incorrect :", data);
+          setChatsList([]);
+        }
 
       } catch (error) {
-        console.error("Erreur lors de l'affichage de la liste des chats.", error);
+        console.error("Erreur réseau lors de l'affichage de la liste des chats.", error);
+        setChatsList([]);
       }
     }
 

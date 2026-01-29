@@ -28,12 +28,24 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                         'Authorization': `Bearer ${token}`
                     }
                 });
+
                 const data = await response.json();
-                const formattedMessages = data.map(msg => ({
-                    sender: msg.role === "assistant" ? "ai" : "user",
-                    text: msg.content
-                }));
-                setMessages(formattedMessages);
+
+                // Verify that the response is ok and an array
+                if (response.ok && Array.isArray(data)) {
+                    const formattedMessages = data.map(msg => ({
+                        sender: msg.role === "assistant" ? "ai" : "user",
+                        text: msg.content
+                    }));
+
+                    setMessages(formattedMessages);
+
+                } else {
+                    // If there is an error we empty messages
+                    console.error("Erreur ou format invalide :", data);
+                    setMessages([]);
+                    
+                }
             } catch (error) {
                 console.error("Erreur lors de la récupération des messages de la conversation.", error);
             }
