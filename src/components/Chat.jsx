@@ -44,7 +44,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                     // If there is an error we empty messages
                     console.error("Erreur ou format invalide :", data);
                     setMessages([]);
-                    
+
                 }
             } catch (error) {
                 console.error("Erreur lors de la récupération des messages de la conversation.", error);
@@ -128,11 +128,11 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
     const currentTitle = currentChatTitle ? currentChatTitle.name : "Nouveau chat";
 
     return (
-        <main className={`flex flex-col h-full relative w-full items-center p-4 ${messages.length === 0 ? "justify-center gap-4" : "gap-8"}`}>
+        <main className={`flex flex-col h-full relative w-full items-center p-4 ${messages?.length === 0 ? "justify-center gap-4" : "gap-8"}`}>
 
-            <div className={`w-full max-w-[850px] flex flex-col items-center ${messages.length ? "flex-1 overflow-y-auto" : "flex-none"}`}>
+            <div className={`w-full max-w-[850px] flex flex-col items-center ${messages?.length ? "flex-1 overflow-y-auto" : "flex-none"}`}>
 
-                {messages.length ? (
+                {messages?.length ? (
                     <div className="flex flex-col w-full gap-6">
                         {messages.map((msg, i) => (
                             <div
