@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import mbLogo from '../assets/mbLogo.png'
+import ReactMarkdown from 'react-markdown'
 
 export default function Chat({ currentChatId, setCurrentChatId, setChatsList, chatsList, user }) {
 
@@ -121,7 +122,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         const data = await response.json();
 
         console.log(data);
-        
+
         // Make sure that this answer is here or show error
         if (data.aiReply && data.aiReply.content) {
             const mistralAnswer = { sender: "ai", text: data.aiReply.content };
@@ -161,12 +162,18 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                             <div
                                 key={i}
                                 className={`p-4 text-sm md:text-base
-                  ${msg.sender === "user"
+                                ${msg.sender === "user"
                                         ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none max-w-[70%]"
                                         : "self-start w-full"
                                     }`}
                             >
-                                {msg.text}
+                                {msg.sender === "ai" ? (
+                                    <ReactMarkdown className="markdown-content">
+                                        {msg.text}
+                                    </ReactMarkdown>
+                                ) : (
+                                    msg.text
+                                )}
                             </div>
                         ))}
                         <div ref={messagesEndRef}></div>
