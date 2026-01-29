@@ -12,6 +12,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
     // --- DEFINE THE STATES --- 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState(''); // Message is empty by default
+    const [isLoading, setIsLoading] = useState(false); // Loading is false by default
 
     // --- DEFINE THE REF ---
     const messagesEndRef = useRef(null)
