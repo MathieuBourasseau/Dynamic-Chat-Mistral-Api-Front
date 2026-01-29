@@ -97,53 +97,63 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
         if (message.trim() === "") return; // Prevent the user to send empty message
 
+        setIsLoading(!isLoading); // Loading is true 
+
         const newMessage = { sender: "user", text: message }; // Get the user message from the textarea
 
         setMessages([...messages, newMessage]); // Create a copy from existing array and add the new message 
 
         setMessage(''); // Textarea is cleared of its content
 
-        // FETCHING TO THE GOOD URL WITH GOOD CHAT CONTENT
-        if (currentChatId) {
-            url = `${API_URL}/chats/${currentChatId}/messages`;
-            bodyData = { newUserMessage: message };
-        }
+        try {
+            // FETCHING TO THE GOOD URL WITH GOOD CHAT CONTENT
+            if (currentChatId) {
+                url = `${API_URL}/chats/${currentChatId}/messages`;
+                bodyData = { newUserMessage: message };
+            }
 
-        // FETCHING message to Mistral API 
-        const response = await fetch(url,
-            {
-                method: "POST", // Add message to database
-                headers: {
-                    'Content-Type': 'application/json', // JSON content sent 
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify(bodyData)
-            });
+            // FETCHING message to Mistral API 
+            const response = await fetch(url,
+                {
+                    method: "POST", // Add message to database
+                    headers: {
+                        'Content-Type': 'application/json', // JSON content sent 
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(bodyData)
+                });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        console.log(data);
+            console.log(data);
 
-        // Make sure that this answer is here or show error
-        if (data.aiReply && data.aiReply.content) {
-            const mistralAnswer = { sender: "ai", text: data.aiReply.content };
-            setMessages((prev) => [...prev, mistralAnswer]);
-        } else {
-            console.error("Réponse de l'IA incomplète :", data);
-        }
+            // Make sure that this answer is here or show error
+            if (data.aiReply && data.aiReply.content) {
+                const mistralAnswer = { sender: "ai", text: data.aiReply.content };
+                setMessages((prev) => [...prev, mistralAnswer]);
+            } else {
+                console.error("Réponse de l'IA incomplète :", data);
+            }
 
-        // Identify the chat of the current conversation
-        if (data.chat) {
+            // Identify the chat of the current conversation
+            if (data.chat) {
 
-            // Create title in panel only if it's the first message and a new chat
-            if (!currentChatId) {
-                setChatsList((prev) => [data.chat, ...prev]);
+                // Create title in panel only if it's the first message and a new chat
+                if (!currentChatId) {
+                    setChatsList((prev) => [data.chat, ...prev]);
+                };
+
+                setCurrentChatId(data.chat.id);
             };
 
-            setCurrentChatId(data.chat.id);
-        };
+        } catch (error) {
 
-    }
+            console.error("Erreur :", error);
+
+        } finally {
+            setIsLoading(false); // loading becomes false at the end of the fetch
+        }
+    };
 
     // --- SHOW THE TITLE CHAT ---
 
@@ -177,6 +187,18 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                                 )}
                             </div>
                         ))}
+
+                        {isLoading && (
+                            <div className="self-start p-4 bg-gray-100 rounded-lg text-gray-500 italic flex items-center gap-2">
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                                    className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full"
+                                />
+                                Mistral est en train de réfléchir...
+                            </div>
+                        )}
+                        
                         <div ref={messagesEndRef}></div>
                     </div>
                 ) : (
