@@ -23,6 +23,7 @@ export default function AuthForm({ setUser }) {
     const [showPassword, setShowPassword] = useState(false); // Password is not shown by default 
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isForgotPassword, setIsForgotPassword] = useState(false); // Forgot password is falsy by default
+    const [errorMessage, setErrorMessage] = useState(''); // Display error message
 
     // --- NAVIGATION ---
     const navigate = useNavigate()
@@ -149,7 +150,10 @@ export default function AuthForm({ setUser }) {
 
         // Verify if the fetch is working
         if (!response.ok) {
-            console.log("Erreur :", data.message);
+
+            setErrorMessage(data.error || "Une erreur est survenue.");
+            setTimeout(() => setErrorMessage(''), 4000);
+
             return;
         }
 
