@@ -9,7 +9,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
     const API_URL = import.meta.env.VITE_API_URL
 
     // --- DEFINE THE STATES --- 
-    const [messages, setMessages] = useState(chatTest);
+    const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState(''); // Message is empty by default
 
     // --- DEFINE THE REF ---
