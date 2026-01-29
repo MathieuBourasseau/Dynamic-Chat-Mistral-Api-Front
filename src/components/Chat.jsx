@@ -16,11 +16,16 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
     useEffect(() => {
         const fetchChatHistory = async () => {
+
+            // Get the token
+            const token = localStorage.getItem('token');
+
             try {
                 const response = await fetch(`${API_URL}/chats/${currentChatId}/messages`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': "application/json",
+                        'Authorization': `Bearer ${token}`
                     }
                 });
                 const data = await response.json();
