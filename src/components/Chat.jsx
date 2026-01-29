@@ -97,12 +97,10 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
         if (message.trim() === "") return; // Prevent the user to send empty message
 
-        setIsLoading(!isLoading); // Loading is true 
+        setIsLoading(true); // Loading is true 
 
         const newMessage = { sender: "user", text: message }; // Get the user message from the textarea
-
         setMessages([...messages, newMessage]); // Create a copy from existing array and add the new message 
-
         setMessage(''); // Textarea is cleared of its content
 
         try {
@@ -179,7 +177,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                                     }`}
                             >
                                 {msg.sender === "ai" ? (
-                                    <ReactMarkdown className="markdown-content">
+                                    <ReactMarkdown className="prose prose-slate max-w-none">
                                         {msg.text}
                                     </ReactMarkdown>
                                 ) : (
@@ -198,7 +196,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                                 Mistral est en train de réfléchir...
                             </div>
                         )}
-                        
+
                         <div ref={messagesEndRef}></div>
                     </div>
                 ) : (
