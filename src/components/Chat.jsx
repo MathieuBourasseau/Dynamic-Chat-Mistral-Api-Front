@@ -163,9 +163,9 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         <main className={`flex flex-col gap-8 h-full relative w-full items-center ${!currentChatId ? "lg:justify-center" : ""} p-4`}>
 
             {/* CHAT MESSAGES OR WELCOME MESSAGE */}
-            <div className={`${currentChatId ? "flex-1 overflow-y-auto" : "flex-1 lg:flex-none"}`}>
+            <div className={`${messages.length ? "flex-1 overflow-y-auto" : "flex-1 lg:flex-none"}`}>
 
-                {currentChatId ? (
+                {messages.length ? (
                     <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
                         {messages.map((msg, i) => (
                             <div
@@ -186,6 +186,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                             </div>
                         ))}
 
+                        {/* LOADER */}
                         {isLoading && (
                             <div className="self-start p-4 bg-gray-100 rounded-lg text-gray-500 italic flex items-center gap-2">
                                 <motion.div
