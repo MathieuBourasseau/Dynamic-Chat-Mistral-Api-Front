@@ -66,7 +66,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
-    }, [messages])
+    }, [messages, isLoading])
 
 
 
@@ -100,7 +100,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         setIsLoading(true); // Loading is true 
 
         const newMessage = { sender: "user", text: message }; // Get the user message from the textarea
-        setMessages([...messages, newMessage]); // Create a copy from existing array and add the new message 
+        setMessages((prev) => [...prev, newMessage]); // Create a copy from existing array and add the new message 
         setMessage(''); // Textarea is cleared of its content
 
         try {
@@ -160,20 +160,20 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
     return (
 
-        <main className={`flex flex-col gap-8 h-full relative w-full ${messages.length === 0 ? "items-center justify-center" : "items-start"} p-4`}>
+        <main className="flex flex-col gap-8 h-full relative w-full items-center p-4">
 
             {/* CHAT MESSAGES OR WELCOME MESSAGE */}
-            <div className={`${messages.length ? "flex-1 overflow-y-auto" : "flex-1 lg:flex-none"}`}>
+            <div className={`w-full flex flex-col items-center ${messages.length ? "flex-1 overflow-y-auto" : "flex-1 lg:flex-none justify-center"}`}>
 
                 {messages.length ? (
-                    <div className="flex flex-1 flex-col max-w-[850px] w-full overflow-y-auto mx-auto gap-6">
+                    <div className="flex flex-col w-full max-w-[850px] gap-6">
                         {messages.map((msg, i) => (
                             <div
                                 key={i}
-                                className={`p-4 text-sm md:text-base
+                                className={`p-4 text-sm md:text-base rounded-2xl shadow-sm
                                 ${msg.sender === "user"
-                                        ? "self-end bg-[#003c57] shadow-sm text-white rounded-lg rounded-tr-none max-w-[70%]"
-                                        : "self-start w-full"
+                                        ? "self-end bg-[#003c57] text-white rounded-tr-none max-w-[80%]"
+                                        : "self-start bg-gray-100 text-gray-800 rounded-tl-none max-w-[85%]"
                                     }`}
                             >
                                 {msg.sender === "ai" ? (
@@ -220,15 +220,15 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
             <form
                 action=""
                 onSubmit={handleSubmit}
-                className="max-w-[850px]  h-[80px] md:h-[150px] w-full border-2 border-gray-200 p-4 rounded-3xl shadow-sm"
+                className="max-w-[850px] w-full border-2 border-gray-200 p-4 rounded-3xl shadow-lg bg-white mb-4"
             >
-                <div className="flex h-full">
+                <div className="flex h-full items-center gap-4">
 
                     {/* USER MESSAGES */}
                     <textarea
                         type="text"
                         placeholder="Ecrivez votre question."
-                        className="h-full flex-1 outline-none resize-none pt-0"
+                        className="h-full flex-1 outline-none resize-none pt-2"
                         value={message}
                         onChange={handleMessage}
                         onKeyDown={handleKeyDown}
@@ -236,10 +236,11 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
 
                     {/* BUTTON TO SEND MESSAGE */}
                     <button
-                        className="self-end cursor-pointer bg-[#f8532a] p-2"
+                        className={`self-end p-3 rounded-full transition-colors ${isLoading ? "bg-gray-300" : "bg-[#f8532a] cursor-pointer"}`}
                         type="submit"
+                        disabled={isLoading}
                     >
-                        <FaArrowUp className="text-[12px] text-white md:text-base" />
+                        <FaArrowUp className="text-white text-base" />
                     </button>
                 </div>
             </form>
