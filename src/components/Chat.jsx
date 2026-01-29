@@ -177,7 +177,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                                     }`}
                             >
                                 {msg.sender === "ai" ? (
-                                    <ReactMarkdown className="prose prose-slate max-w-none">
+                                    <ReactMarkdown className="prose prose-slate max-w-none prose-headings:mb-2 prose-headings:mt-4 prose-li:my-0 prose-p:leading-relaxed">
                                         {msg.text}
                                     </ReactMarkdown>
                                 ) : (
