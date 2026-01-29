@@ -89,7 +89,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         let url = `${API_URL}/chats`;
 
         // Bodydata by default 
-        let bodyData = { firstMessage: message, user_id: 1 }
+        let bodyData = { firstMessage: message, user_id: user.id }
 
         e.preventDefault(); // Prevent the form event by default
 
@@ -113,6 +113,7 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
                 method: "POST", // Add message to database
                 headers: {
                     'Content-Type': 'application/json', // JSON content sent 
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(bodyData)
             });
@@ -120,7 +121,14 @@ export default function Chat({ currentChatId, setCurrentChatId, setChatsList, ch
         const data = await response.json();
 
         console.log(data);
-        const mistralAnswer = { sender: "ai", text: data.aiReply.content }; // Response from the backend
+        
+        // Make sure that this answer is here or show error
+        if (data.aiReply && data.aiReply.content) {
+            const mistralAnswer = { sender: "ai", text: data.aiReply.content };
+            setMessages((prev) => [...prev, mistralAnswer]);
+        } else {
+            console.error("Réponse de l'IA incomplète :", data);
+        }
 
         // Update the list of messages 
         setMessages((prev) => [...prev, mistralAnswer]);
