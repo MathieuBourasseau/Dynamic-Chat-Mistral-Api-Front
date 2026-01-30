@@ -40,8 +40,11 @@ function App() {
 
         // 
         if (response.ok) {
+
           const data = await response.json();
           setUser(data.user);
+          setCurrentChatId(null);
+          
         } else {
           localStorage.removeItem('token');
         }
