@@ -177,7 +177,7 @@ export default function AuthForm({ setUser, setCurrentChatId }) {
                 sessionStorage.removeItem("currentChatId");
 
                 setCurrentChatId(null);
-                
+
                 setUser(data.user);
                 setSuccessMessage('');
                 navigate('/')
@@ -366,6 +366,18 @@ export default function AuthForm({ setUser, setCurrentChatId }) {
                     </>
                 )}
             </form>
+            
+            {/* BLOC TO PREVENT USER TO USE CONFIDENTIALS DATA */}
+            
+            <div className="m-4 p-4 border border-amber-200 bg-amber-50 rounded-lg text-sm text-amber-900 max-w-[400px]">
+                <p className="font-bold mb-2">⚠️ Note importante :</p>
+                <p className="mb-2">
+                    Ce produit est un projet de portfolio personnel et n'est pas affilié à l'entreprise <strong>Mistral</strong>.
+                </p>
+                <p className="italic">
+                    Par mesure de prudence, merci de ne pas utiliser vos identifiants habituels ni de partager des informations confidentielles lors de vos tests.
+                </p>
+            </div>
 
             {/* SUCCESS OR ERROR MESSAGE */}
 
